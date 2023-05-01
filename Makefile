@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/01 11:48:45 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/01 16:50:11 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,16 @@ LIBFT_DIR = libft/
 LIBFT_FILE = libft.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
 
+MLX_DIR = mlx/
+MLX_FILE = libmlx.a
+MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
+
 ###############################################################################
 #									SRCS									  #
 ###############################################################################
 
 SRCS_DIR = srcs/
-SRC_FILES =
+SRC_FILES = fdf.c key_hook.c colors.c
 
 ###############################################################################
 #									OBJS									  #
@@ -39,36 +43,39 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 AR = ar rc
-INCLUDE  = -I ./include/ -I ./libft/include/
+INCLUDE  = -I ./include/ -I ./libft/include/ -I ./mlx/
 
 ###############################################################################
 #									RULES									  #
 ###############################################################################
 
 all: 		$(NAME)
-bonus:		$(NAME_BONUS)
 
 m_libft:
 			@make -C $(LIBFT_DIR)
+m_mlx:
+			@make -C $(MLX_DIR)
 
-$(NAME):	m_libft $(OBJS_DIR) $(OBJS)
-			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -o $@
+$(NAME):	m_libft m_mlx $(OBJS_DIR) $(OBJS)
+			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 $(OBJS_DIR):
 						@mkdir $@
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
-				$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+				$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
 
 clean: 		
 			make -C $(LIBFT_DIR) clean
+			make -C $(MLX_DIR) clean
 			@$(RM) $(OBJS)
 
 fclean: 	clean
 			make -C $(LIBFT_DIR) fclean
+			make -C $(MLX_DIR) clean
 			@$(RM) $(NAME)
 
 re:			fclean all
 			
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
