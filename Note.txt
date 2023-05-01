@@ -1,3 +1,8 @@
+ALLOWED: math.h (man 3 math)
+		 libft.h
+		 ft_printf.h
+		 get_next_line.h
+
 Program name: 	fdf
 Turn in files:	Makefile, *.h, *.c
 Makefile:		NAME, all, clean, fclean, re
