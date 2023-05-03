@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_defs.h                                       :+:      :+:    :+:   */
+/*   window_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 16:02:08 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/02 12:04:03 by ffornes-         ###   ########.fr       */
+/*   Created: 2023/05/02 11:54:42 by ffornes-          #+#    #+#             */
+/*   Updated: 2023/05/02 12:43:24 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_DEFS_H
-# define COLOR_DEFS_H
+#include "ft_printf.h"
+#include "fdf.h"
+#include "mlx.h"
 
-# define RED	0x00FF0000
-# define GREEN 	0x0000FF00
-# define BLUE 	0x000000FF
-# define BLACK 	0x00000000
+void	image_color(t_data *img, int x, int y, int color)
+{
+	int	i;
+	int	j;
 
-#endif
+	i = 0;
+	j = 0;
+	while (i < x && j < y)
+	{
+		my_mlx_pixel_put(img, i, j, color);
+		i++;
+		if (i == x)
+		{
+			i = 0;
+			j++;
+		}
+	}
+}

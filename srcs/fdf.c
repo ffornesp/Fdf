@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/01 16:48:59 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:03:58 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "color_defs.h"
 #include "mlx.h"
 #include <fcntl.h> // Needed for open
+#include <stdlib.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -25,39 +26,30 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	test_keyhook(void *mlx, void *win)
-{
-	t_vars	vars;
-
-	vars.mlx = mlx;
-	vars.win = win;
-	mlx_key_hook(vars.win, key_hook, &vars);
-}
-
-void	create_window(void *mlx)
+void	fdf(void *mlx, int x, int y)
 {
 	void	*mlx_win;
+	t_vars	vars;
 	t_data	img;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Fdf");
-	img.img = mlx_new_image(mlx, 1920, 1080);
+	mlx_win = mlx_new_window(mlx, x, y, "Fdf");
+	img.img = mlx_new_image(mlx, x, y);
 	img.addr = mlx_get_data_addr(img.img, &img.bpps, &img.l_len, &img.endian);
-	while (i < 1920 && j < 1080)
-	{	
-		my_mlx_pixel_put(&img, i, j, BLUE);
-		i++;
-		if (i == 1920)
-		{
-			i = 0;
-			j++;
-		}
-	}
+	// Change pixel
+	int	*p0 = malloc(sizeof(int) * 2);
+	int *p1 = malloc(sizeof(int) * 2);
+	p0[0] = 100;
+	p0[1] = 200;
+	p1[0] = 105;
+	p1[1] = 205;
+	line_renderer(p0, p1, img);
+	free(p0);
+	free(p1);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	test_keyhook(mlx, mlx_win);
+	vars.mlx = mlx;
+	vars.win = mlx_win;
+	vars.img = img;
+	mlx_hook(vars.win, 2, 1l<<0, key_hook, &vars);
 	mlx_loop(mlx);
 }
 
@@ -74,7 +66,7 @@ int	main(int argc, char *argv[])
 		if (ft_strncmp(str, "fdf", 3))
 		{
 			mlx = mlx_init();
-			create_window(mlx);
+			fdf(mlx, 1920, 1080);
 		}
 	}
 	return (0);

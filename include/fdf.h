@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/01 16:54:12 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:21:36 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
+	t_data	img;
 }			t_vars;
 
-void			create_window(void *mlx);
-void			test_keyhook(void *mlx, void *win);
+void			line_renderer(int *p0, int *p1, t_data img);
+
+void			print_pentagon(t_data img, int x, int y, int color);
+void			print_square(t_data img, int x, int y, int color);
+void			print_triangle(t_data img, int x, int y, int color);
+void			image_color(t_data *img, int x, int y, int color);
+
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 int				key_hook(int keycode, t_vars *vars);
