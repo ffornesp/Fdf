@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/04 11:15:42 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:48:11 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ typedef struct s_vars
 
 typedef struct s_point
 {
-	int	*value;
-	int	*color;
+	int		value;
+	char	*color;
+	int		size;
 }			t_point;
+
+t_point			**parse(char *file);
 
 void			line_renderer(int *p0, int *p1, t_data img);
 

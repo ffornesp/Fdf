@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/03 11:21:10 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/04 11:51:21 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
 
 SRCS_DIR = srcs/
 SRC_FILES = fdf.c window_handler.c key_hook.c colors.c print_shape.c \
-			line_renderer.c
+			line_renderer.c parse_input.c
 
 ###############################################################################
 #									OBJS									  #
