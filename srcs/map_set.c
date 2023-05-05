@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:24:14 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 18:09:11 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 19:33:35 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,32 @@ void	map_set_size(t_map *map)
 
 static void	set_point_coords(t_point *point, int x, int y, char *line)
 {
+	char	**split;
+	int		i;
+
 	point->pos[X] = x;
 	point->pos[Y] = y;
 	if (!ft_strchr(line, ','))
 		point->pos[Z] = ft_atoi(line);
 	else
 	{
-		ft_putstr_fd("Error_3: This map contains color info\n", 2);
-		//Add atoi base... set color as hexa && decimal
+		i = 0;
+		if (*line == '-')
+		while (ft_isdigit(*line))
+		{
+			point->pos[Z] *= 10;
+			point->pos[Z] += *line - '0';
+		}
+		ft_printf("%s\n", line);
+		split = ft_split(line, ',');
+		point->pos[Z] = ft_atoi(split[0]);
+		while (*(split[1] + i) != 'x')
+			i++;
+		i++;
+		point->color = ft_atoi_base((split[1] + i), 16);
+		free(split[0]);
+		free(split[1]);
+		free(split);
 	}
 }
 
@@ -91,5 +109,6 @@ void	map_set_points(t_map *map)
 		free(m_lines[i++]);
 		free(s_line);
 	}
+	ft_printf("\n");
 	free(m_lines);
 }

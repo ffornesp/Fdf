@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:18:43 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 18:07:28 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 18:56:00 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	base(int c, int base)
 	return (-1);
 }
 
-int	ft_atoi(const char *str, int arg_base)
+int	ft_atoi_base(const char *str, int arg_base)
 {
 	int	i;
 	int	is_negative;
