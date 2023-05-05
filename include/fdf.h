@@ -6,12 +6,16 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 12:56:10 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:25:50 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# define X 0
+# define Y 1
+# define Z 2
 
 typedef struct s_data
 {
@@ -26,36 +30,32 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-	t_data	img;
 }			t_vars;
 
 typedef struct s_point
 {
-	int		value;
-	char	*color;
-	int		size_col;
+	float	pos[3];
+	int		color;
+	int		hex_color;
 }			t_point;
 
-t_point			**parse(char *file);
+typedef struct s_map
+{
+	char	*fdf_file;
+	float	limits[3];
+	int		len;
+	t_point	*points;
+}	t_map;
 
-void			line_renderer(int *p0, int *p1, t_data img);
+void			load_map(t_map *map, char *fdf_file);
 
-void			render_points(t_point **points, t_data img);
+void			map_init(t_map *map);
+void			map_size(t_map *map);
+void			map_points(t_map *map);
 
-void			print_pentagon(t_data img, int x, int y, int color);
-void			print_square(t_data img, int x, int y, int color);
-void			print_triangle(t_data img, int x, int y, int color);
-void			image_color(t_data *img, int x, int y, int color);
+char			*parse_map(int fd);
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 int				key_hook(int keycode, t_vars *vars);
-
-// LiNe ToO lOnG
-int				c_color(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
-unsigned char	get_t(int trgb);
-unsigned char	get_r(int trgb);
-unsigned char	get_g(int trgb);
-unsigned char	get_b(int trgb);
-
 #endif

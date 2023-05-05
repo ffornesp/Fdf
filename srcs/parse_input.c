@@ -6,18 +6,16 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:26 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 13:31:42 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:49:23 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
 #include "get_next_line.h"
 #include "fdf.h"
-#include <unistd.h>
-#include <fcntl.h>
 #include <stdlib.h>
 
+/*
 static int	char_in_str(char *str, char c)
 {
 	int	i;
@@ -82,18 +80,14 @@ static t_point	**generate_points(char *input, int size)
 	free(input);
 	free(split);
 	return (points);
-}
+}*/
 
-t_point **parse(char *file)
+char	*parse_map(int fd)
 {
-	int		fd;
 	char	*line;
 	char	*input;
 	char	*aux;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (0);
 	line = get_next_line(fd);
 	input = ft_strdup("");
 	while (line)
@@ -105,6 +99,5 @@ t_point **parse(char *file)
 		line = get_next_line(fd);
 	}
 	free(line);
-	close(fd);
-	return (generate_points(input, char_in_str(input, '\n')));
+	return (input);
 }

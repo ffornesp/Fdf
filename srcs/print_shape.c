@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:48:29 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/02 17:55:14 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:45:26 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	print_square(t_data img, int x, int y, int color)
 	{
 		if (i >= 825 && i <= 1095 && j >= 405 && j <= 675)
 			my_mlx_pixel_put(&img, i, j, color);
-		else
-			my_mlx_pixel_put(&img, i, j, BLACK);
 		i++;
 		if (i == x)
 		{

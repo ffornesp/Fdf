@@ -6,10 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:41:23 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 13:59:55 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:51:46 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "fdf.h"
 #include "color_defs.h"
 #include <stdlib.h>
@@ -30,7 +31,22 @@ void	render_points(t_point **points, t_data img)
 		j = 0;
 		while(points[i][0].size_col > j)
 		{
-			p1[0] = j * 15;
+			p1[0] = 960;
+			p1[1] = 108;
+			p2[0] = 1760;
+			p2[1] = 972;
+			line_renderer(p1, p2, img);
+			p1[0] = 160;
+			p1[1] = 972;
+			p2[0] = 1760;
+			p2[1] = 972;
+			line_renderer(p1, p2, img);
+			p1[0] = 160;
+			p1[1] = 972;
+			p2[0] = 960;
+			p2[1] = 108;
+			line_renderer(p1, p2, img);
+/*			p1[0] = j * 15;
 			p1[1] = i * 15;
 			if (points[i][j].value > 0)
 				my_mlx_pixel_put(&img, p1[0], p1[1], GREEN);
@@ -38,16 +54,18 @@ void	render_points(t_point **points, t_data img)
 				my_mlx_pixel_put(&img, p1[0], p1[1], RED);
 			if (points[i])
 			{
+				ft_printf("Hello\n");
 				p2[0] = j * 15;
 				p2[1] = (i + 1) * 15;
 				line_renderer(p1, p2, img);
 			}
 			if (points[i][0].size_col > j)
 			{
+				ft_printf("ByeBye\n");
 				p2[0] = (j + 1) * 15;
 				p2[1] = i * 15;
 				line_renderer(p1, p2, img);
-			}
+			}*/
 			j++;
 		}
 		i++;

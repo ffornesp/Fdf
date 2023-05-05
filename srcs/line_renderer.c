@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/04 10:23:51 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:57:40 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	straight_line(int *p0, int *p1, t_data img)
 	{
 		while (p0[1] != p1[1])
 		{
-			my_mlx_pixel_put(&img, p0[0], p0[1], GREEN);
+			my_mlx_pixel_put(&img, p0[0], p0[1], BLUE);
 			if (p0[1] < p1[1])
 				p0[1]++;
 			else
