@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:24:14 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 17:13:38 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:18:48 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	set_point_coords(t_point *point, int x, int y, char *line)
 	else
 	{
 		ft_putstr_fd("Error_3: This map contains color info\n", 2);
+
 	}
 }
 
