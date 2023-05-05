@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 16:25:50 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:14:00 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_map
 void			load_map(t_map *map, char *fdf_file);
 
 void			map_init(t_map *map);
-void			map_size(t_map *map);
-void			map_points(t_map *map);
+void			map_set_size(t_map *map);
+void			map_set_points(t_map *map);
 
 char			*parse_map(int fd);
 

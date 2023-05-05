@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/05 15:46:31 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/05 16:42:22 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ all: 		$(NAME)
 m_libft:
 			@make -C $(LIBFT_DIR)
 m_mlx:
-			@make -C $(MLX_DIR)
+			@make -C $(MLX_DIR) 2> ERRORS
+			@rm ERRORS
 
 $(NAME):	m_libft m_mlx $(OBJS_DIR) $(OBJS)
 			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@

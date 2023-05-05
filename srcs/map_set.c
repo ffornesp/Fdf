@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:24:14 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 16:35:29 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:13:38 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	map_init(t_map *map)
 	map->len = 0;
 }
 
-void	map_size(t_map *map)
+void	map_set_size(t_map *map)
 {
 	int	i;
 	int	elements;
@@ -41,7 +41,7 @@ void	map_size(t_map *map)
 		{
 			map->limits[Y]++;
 			if (map->limits[X] != 0 && map->limits[X] != elements)
-				ft_printf("Error1: Limits X && elements are not equal\n");
+				ft_putstr_fd("Error_1: Limits X && elements are not equal\n", 2);
 			else
 				map->limits[X] = elements;
 			elements = 0;
@@ -49,12 +49,24 @@ void	map_size(t_map *map)
 		i++;
 	}
 	if (map->limits[X] != 0 && map->limits[X] != elements)
-		ft_printf("Error2: Limits X && elements are not equal\n");
+		ft_putstr_fd("Error_2: Limits X && elements are not equal\n", 2);
 	map->limits[Y]++;
 	map->len = map->limits[X] * map->limits[Y];
 }
 
-void	map_points(t_map *map)
+static void	set_point_coords(t_point *point, int x, int y, char *line)
+{
+	point->pos[X] = x;
+	point->pos[Y] = y;
+	if (!ft_strchr(line, ','))
+		point->pos[Z] = ft_atoi(line);
+	else
+	{
+		ft_putstr_fd("Error_3: This map contains color info\n", 2);
+	}
+}
+
+void	map_set_points(t_map *map)
 {
 	int		i;
 	int		j;
@@ -70,18 +82,13 @@ void	map_points(t_map *map)
 	{
 		s_line = ft_split(m_lines[i], ' ');
 		j = 0;
-		while (j < map ->limits[X])
+		while (j < map->limits[X])
 		{
-			map->points[n].pos[X] = j;
-			map->points[n].pos[Y] = i;
-			map->points[n].pos[Z] = ft_atoi(s_line[j]);
-			n++;
-			j++;
-			free(s_line[j]);
+			set_point_coords(&map->points[n++], j, i, s_line[j]);
+			free(s_line[j++]);
 		}
-		free(m_lines[i]);
+		free(m_lines[i++]);
 		free(s_line);
-		i++;
 	}
 	free(m_lines);
 }
