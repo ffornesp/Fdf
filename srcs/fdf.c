@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/04 18:48:14 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:00:18 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,33 @@ void	check_points(char *file)
 	free(points);
 }*/
 
-void	fdf(void *mlx, char *file)
+void	fdf(char *file)
 {
-//	void	*mlx_win;
-//	t_vars	vars;
-//	t_data	img;
-	
+	void	*mlx;
+	void	*mlx_win;
+	t_vars	vars;
+	t_data	img;
+	t_point	**points;
+	int		i;
+	int		j;
+
+	i = 0;
 	//check_points(file);
-	free(parse(file));
-	mlx = NULL;
-	return ;
-	/*
+	points = (parse(file));
+	while (points[i])
+	{
+		j = 0;
+		while (points[i][0].size > j)
+		{
+			ft_printf("%d", points[i][j].value);
+			j++;
+		}
+		free(points[i]);
+		ft_printf("\n");
+		i++;
+	}
+	free(points);
+	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Fdf");
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bpps, &img.l_len, &img.endian);
@@ -73,13 +89,12 @@ void	fdf(void *mlx, char *file)
 	vars.win = mlx_win;
 	vars.img = img;
 	mlx_hook(vars.win, 2, 1l<<0, key_hook, &vars);
-	mlx_loop(mlx);*/
+	mlx_loop(mlx);
 }
 
 int	main(int argc, char *argv[])
 {
 	char	*str;
-	void	*mlx;
 
 	if (argc < 2 || argc > 2)
 		return (0);
@@ -88,9 +103,7 @@ int	main(int argc, char *argv[])
 	{
 		if (ft_strncmp(str, "fdf", 3))
 		{
-			mlx = NULL;
-			//mlx = mlx_init();
-			fdf(mlx, argv[1]);
+			fdf(argv[1]);
 		}
 	}
 	return (0);

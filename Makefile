@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/04 11:51:21 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/05 09:59:26 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(OBJ_FILES))
 ###############################################################################
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 RM = rm -f
 AR = ar rc
 INCLUDE  = -I ./include/ -I ./libft/include/ -I ./mlx/

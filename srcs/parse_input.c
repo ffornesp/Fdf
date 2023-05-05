@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:26 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/04 18:48:09 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:41:10 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,50 @@ static t_point	*save_points(char *line)
 	return (points);
 }*/
 
+static void	set_points(char **numbers, t_point **p)
+{
+	t_point	*aux;
+	int		i;
+
+	aux = *p;
+	i = 0;
+	while (numbers[i])
+	{
+		if (ft_strchr(numbers[i], ','))
+			ft_printf("Number contains color info\n");
+		aux[i].value = ft_atoi(numbers[i]);
+		free(numbers[i++]);
+	}
+	aux[0].size = i;
+}
+
 static t_point	**generate_points(char *input, int size)
 {
 	t_point	**points;
+	t_point	*p;
 	char	**split;
 	char	**numbers;
+	int		i;
+	int		j;
 
-	points = malloc(sizeof(t_point *) * size);
+	i = 0;
+	points = malloc(sizeof(t_point *) * size + 1);
 	split = ft_split(input, '\n');
-	while (split)
+	while (split[i])
 	{
-		numbers = ft_split(*split, ' ');
-		free(*split);
-		split++;
+		j = 0;
+		numbers = ft_split(split[i], ' ');
+		while (numbers[j])
+			j++;
+		p = malloc(sizeof(t_point) * j + 1);
+		set_points(numbers, &p);
+		points[i] = p;
+		free(numbers);
+		free(split[i++]);
 	}
+	points[i] = NULL;
 	free(split);
+	return (points);
 }
 
 t_point **parse(char *file)
@@ -113,7 +142,8 @@ t_point **parse(char *file)
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(input);
 	free(line);
 	close(fd);
-	return (generate_points(input, char_in_str(input)));
+	return (generate_points(input, char_in_str(input, '\n')));
 }
