@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:26 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 11:35:49 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:56:03 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	set_points(char **numbers, t_point **p)
 		free(numbers[i++]);
 	}
 	while (j < i)
-		aux[j++].size = i;
+		aux[j++].size_col = i;
 }
 
 static t_point	**generate_points(char *input, int size)
@@ -78,7 +78,7 @@ static t_point	**generate_points(char *input, int size)
 		free(numbers);
 		free(split[i++]);
 	}
-	points[i] = NULL;
+	free(input);
 	free(split);
 	return (points);
 }
@@ -103,7 +103,6 @@ t_point **parse(char *file)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(input);
 	free(line);
 	close(fd);
 	return (generate_points(input, char_in_str(input, '\n')));
