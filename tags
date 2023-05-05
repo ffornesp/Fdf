@@ -75,6 +75,7 @@ bytes_per_pixel	mlx/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RG
 c_color	srcs/colors.c	/^int	c_color(unsigned char t, unsigned char r, unsigned char g, unsigned char b)$/;"	f
 calc_size	libft/srcs/ft_itoa.c	/^static void	calc_size(long int n, size_t *size)$/;"	f	file:
 char_in_str	srcs/parse_input.c	/^static int	char_in_str(char *str, char c)$/;"	f	file:
+check_points	srcs/fdf.c	/^static void	check_points(t_point **points)$/;"	f	file:
 col	mlx/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	include/fdf.h	/^	char	*color;$/;"	m	struct:s_point
 color	mlx/mlx_xpm.c	/^  int   color;$/;"	m	struct:s_col_name	file:
@@ -230,6 +231,7 @@ print_triangle	srcs/print_shape.c	/^void	print_triangle(t_data img, int x, int y
 print_u	libft/ft_printf/srcs/print_u.c	/^int	print_u(va_list args, int count)$/;"	f
 print_x	libft/ft_printf/srcs/print_x.c	/^int	print_x(va_list args, int count, char x)$/;"	f
 read_to_buff	libft/get_next_line/get_next_line.c	/^static char	*read_to_buff(int fd, char *buffer, char *line)$/;"	f	file:
+render_points	srcs/render_points.c	/^void	render_points(t_point **points, t_data img)$/;"	f
 s_col_name	mlx/mlx_xpm.c	/^struct  s_col_name$/;"	s	file:
 s_data	include/fdf.h	/^typedef struct s_data$/;"	s
 s_list	libft/include/libft.h	/^typedef struct s_list$/;"	s
@@ -239,7 +241,7 @@ s_xpm_col	mlx/mlx_xpm.c	/^typedef struct  s_xpm_col$/;"	s	file:
 save_remains	libft/get_next_line/get_next_line.c	/^static char	*save_remains(char *str)$/;"	f	file:
 save_string	libft/srcs/ft_split.c	/^static char	**save_string(const char *s, char c, size_t n, int j)$/;"	f	file:
 set_points	srcs/parse_input.c	/^static void	set_points(char **numbers, t_point **p)$/;"	f	file:
-size	include/fdf.h	/^	int		size;$/;"	m	struct:s_point
+size_col	include/fdf.h	/^	int		size_col;$/;"	m	struct:s_point
 straight_line	srcs/line_renderer.c	/^static void	straight_line(int *p0, int *p1, t_data img)$/;"	f	file:
 t_data	include/fdf.h	/^}			t_data;$/;"	t	typeref:struct:s_data
 t_list	libft/include/libft.h	/^}	t_list;$/;"	t	typeref:struct:s_list

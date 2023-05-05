@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:26 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 12:56:03 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:31:42 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static t_point	**generate_points(char *input, int size)
 		free(numbers);
 		free(split[i++]);
 	}
+	points[i] = NULL;
 	free(input);
 	free(split);
 	return (points);

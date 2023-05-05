@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:41:23 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 12:34:08 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:59:55 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	render_points(t_point **points, t_data img)
 	while (points[i])
 	{
 		j = 0;
-		while(points[i][j].size > j)
+		while(points[i][0].size_col > j)
 		{
 			p1[0] = j * 15;
 			p1[1] = i * 15;
@@ -36,17 +36,17 @@ void	render_points(t_point **points, t_data img)
 				my_mlx_pixel_put(&img, p1[0], p1[1], GREEN);
 			else
 				my_mlx_pixel_put(&img, p1[0], p1[1], RED);
-			if (points[i + 1])
+			if (points[i])
 			{
-				p2[0] = j;
+				p2[0] = j * 15;
 				p2[1] = (i + 1) * 15;
-//				line_renderer(p1, p2, img);
+				line_renderer(p1, p2, img);
 			}
-			if (points[i][j].size > (j - 1))
+			if (points[i][0].size_col > j)
 			{
 				p2[0] = (j + 1) * 15;
-				p2[1] = i;
-//				line_renderer(p1, p2, img);
+				p2[1] = i * 15;
+				line_renderer(p1, p2, img);
 			}
 			j++;
 		}
