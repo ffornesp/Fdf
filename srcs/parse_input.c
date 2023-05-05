@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:26 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 10:41:10 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:35:49 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,56 +33,16 @@ static int	char_in_str(char *str, char c)
 	}
 	return (j);
 }
-/*
-static int	strstr_size(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-static t_point	*save_points(char *line)
-{
-	t_point	*points;
-	char	**numbers;
-	char	**tmp;
-	int		i;
-
-	numbers = ft_split(line, ' ');
-	points = malloc(sizeof(t_point) * strstr_size(numbers));
-	i = 0;
-	while (numbers[i])
-	{
-		if (ft_strchr(numbers[i], ','))
-		{
-			tmp = ft_split(numbers[i], ',');
-			points[i].value = ft_atoi(tmp[0]);
-			points[i].color = tmp[1];
-			free(tmp[0]);
-			free(tmp[1]);
-			free(tmp);
-		}
-		else
-			points[i].color = 0;
-		points[i].value = ft_atoi(numbers[i]);
-		points[i].size = strstr_size(numbers);
-		free(numbers[i]);
-		i++;
-	}
-	free(numbers);
-	return (points);
-}*/
 
 static void	set_points(char **numbers, t_point **p)
 {
 	t_point	*aux;
 	int		i;
+	int		j;
 
 	aux = *p;
 	i = 0;
+	j = 0;
 	while (numbers[i])
 	{
 		if (ft_strchr(numbers[i], ','))
@@ -90,7 +50,8 @@ static void	set_points(char **numbers, t_point **p)
 		aux[i].value = ft_atoi(numbers[i]);
 		free(numbers[i++]);
 	}
-	aux[0].size = i;
+	while (j < i)
+		aux[j++].size = i;
 }
 
 static t_point	**generate_points(char *input, int size)
