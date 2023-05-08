@@ -6,10 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:44:51 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 15:50:23 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:31:26 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "fdf.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)

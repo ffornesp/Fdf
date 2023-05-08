@@ -6,12 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:24:14 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 19:33:35 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/08 10:42:10 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
 #include "fdf.h"
 #include <stdlib.h>
 
@@ -32,18 +31,16 @@ void	map_set_size(t_map *map)
 	elements = 0;
 	while (map->fdf_file[i])
 	{
-		if (map->fdf_file[i] == '\n' && map->fdf_file[i + 1] == '\0')
-			break ;
-		if (ft_isalnum(map->fdf_file[i]) && (map->fdf_file[i + 1] == ' ' 
-			|| map->fdf_file[i + 1] == '\n' || map->fdf_file[i + 1] == '\0'))
+		if (ft_isalnum(map->fdf_file[i]) && (map->fdf_file[i + 1] == ' '
+				|| map->fdf_file[i + 1] == '\n'
+				|| map->fdf_file[i + 1] == '\0'))
 				elements++;
-		if (map->fdf_file[i] == '\n')
+		if (map->fdf_file[i] == '\n' && map->fdf_file[i + 1] != '\0')
 		{
 			map->limits[Y]++;
 			if (map->limits[X] != 0 && map->limits[X] != elements)
 				ft_putstr_fd("Error_1: Limits X && elements are not equal\n", 2);
-			else
-				map->limits[X] = elements;
+			map->limits[X] = elements;
 			elements = 0;
 		}
 		i++;
@@ -52,63 +49,4 @@ void	map_set_size(t_map *map)
 		ft_putstr_fd("Error_2: Limits X && elements are not equal\n", 2);
 	map->limits[Y]++;
 	map->len = map->limits[X] * map->limits[Y];
-}
-
-static void	set_point_coords(t_point *point, int x, int y, char *line)
-{
-	char	**split;
-	int		i;
-
-	point->pos[X] = x;
-	point->pos[Y] = y;
-	if (!ft_strchr(line, ','))
-		point->pos[Z] = ft_atoi(line);
-	else
-	{
-		i = 0;
-		if (*line == '-')
-		while (ft_isdigit(*line))
-		{
-			point->pos[Z] *= 10;
-			point->pos[Z] += *line - '0';
-		}
-		ft_printf("%s\n", line);
-		split = ft_split(line, ',');
-		point->pos[Z] = ft_atoi(split[0]);
-		while (*(split[1] + i) != 'x')
-			i++;
-		i++;
-		point->color = ft_atoi_base((split[1] + i), 16);
-		free(split[0]);
-		free(split[1]);
-		free(split);
-	}
-}
-
-void	map_set_points(t_map *map)
-{
-	int		i;
-	int		j;
-	int		n;
-	char	**m_lines;
-	char	**s_line;
-
-	i = 0;
-	n = 0;
-	map->points = ft_calloc(map->len, sizeof(t_point));
-	m_lines = ft_split(map->fdf_file, '\n');
-	while (i < map->limits[Y])
-	{
-		s_line = ft_split(m_lines[i], ' ');
-		j = 0;
-		while (j < map->limits[X])
-		{
-			set_point_coords(&map->points[n++], j, i, s_line[j]);
-			free(s_line[j++]);
-		}
-		free(m_lines[i++]);
-		free(s_line);
-	}
-	ft_printf("\n");
-	free(m_lines);
 }

@@ -34,3 +34,7 @@ Graphic mngmnt:	Your program has to display the image in a window.
 		you to read data from the file in a quick and simple way.
 	Keep in mind that the goal of this project is not to parse maps! However, this doesn't mean that your program
 		should crash when run. It means that we assume the map contained in the file is porperly formatted.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+REMEMBER !!! mlx_put_image_to_window(vars->mlx, vars->win, data->img, X, Y);
+			 my_mlx_pixel_put(data, X, Y, COLOR);

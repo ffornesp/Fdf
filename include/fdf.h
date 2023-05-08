@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/05 17:14:00 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:44:07 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,22 @@ typedef struct s_map
 	float	limits[3];
 	int		len;
 	t_point	*points;
-}	t_map;
+}			t_map;
 
-void			load_map(t_map *map, char *fdf_file);
+void	load_map(t_map *map, char *fdf_file);
 
-void			map_init(t_map *map);
-void			map_set_size(t_map *map);
-void			map_set_points(t_map *map);
+char	*parse_map(int fd);
 
-char			*parse_map(int fd);
+void	map_init(t_map *map);
+void	map_set_size(t_map *map);
+void	map_set_points(t_map *map);
 
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		draw_screen(t_map *map, t_vars *vars, t_data *data);
 
-int				key_hook(int keycode, t_vars *vars);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+void	line_renderer(t_point *p0, t_point *p1, t_data *img);
+
+int		key_hook(int keycode, t_vars *vars);
+
 #endif
