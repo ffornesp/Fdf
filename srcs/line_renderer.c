@@ -6,86 +6,138 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/09 10:31:15 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/09 17:30:16 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "fdf.h"
 #include "color_defs.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-/*
-static void	other_line(t_point p0, t_point p1, t_data *img)
+static void	other_line(t_point p0, t_point p1, t_data *img, int scale)
 {
-	float	x;
-	float	y;
-	float	dx;
-	float	dy;
+	int		dx;
+	int		dy;
+	int		d;
 	
+	p0.pos[X] *= scale;
+	p0.pos[Y] *= scale;
+	p1.pos[X] *= scale;
+	p1.pos[Y] *= scale;
 	dx = p1.pos[X] - p0.pos[X];
 	dy = p1.pos[Y] - p0.pos[Y];
-	x = p0.pos[X];
-	y = (dy / dx) * (float)(x - p0.pos[X]) + (float)p0.pos[Y];
-	while (x < p1.pos[X] && y < p1.pos[Y])
+	d = 2 * dy - dx;
+	if (dy < 0)
+		d = 2 * dx + dy;
+	while (p0.pos[X] <= p1.pos[X] && p0.pos[Y] <= p1.pos[Y])
 	{
-		if (dx >= dy)
+		if (dy > 0)
 		{
-			y += (dy / dx);
-			my_mlx_pixel_put(img, x, y, GREEN);
-			x++;
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+			if (dx > dy)
+			{
+				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
+				p0.pos[X]++;
+				if (d <= 0)
+					d += 2 * dy;
+				else
+				{
+					d += 2 * (dy - dx);
+					p0.pos[Y]++;
+				}
+			}
+			else
+			{
+				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+				p0.pos[Y]++;
+				if (d <= 0)
+					d += 2 * dx;
+				else
+				{
+					d += 2 * (dx - dy);
+					p0.pos[X]++;
+				}
+			}
 		}
 		else
 		{
-			x += (dx / dy);
-			my_mlx_pixel_put(img, x, y, RED);
-			y++;
-		}
-	}
-}*/
-
-static void	straight_line(t_point *p0, t_point *p1, t_data *img)
-{
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
-
-	x0 = (int)p0->pos[X] * 40;
-	y0 = (int)p0->pos[Y] * 40;
-	x1 = (int)p1->pos[X] * 40;
-	y1 = (int)p1->pos[Y] * 40;
-	if (x0 == x1) // VERTICAL
-	{
-		while (y0 != y1)
-		{
-			my_mlx_pixel_put(img, x0, y0, BLUE);
-			if (y0 < y1)
-				y0++;
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+			if (dx > dy)
+			{
+				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
+				p0.pos[X]++;
+				if (d > 0)
+					d += 2 * dx;
+				else
+				{
+					d += 2 * (dx + dy);
+					p0.pos[Y]--;
+				}
+			}
 			else
-				y0--;
-		}
-	}
-	else if (y0 == y1)
-	{
-		while (x0 != x1)
-		{
-			my_mlx_pixel_put(img, x0, y0, GREEN);
-			if (x0 < x1)
-				x0++;
-			else if (x0 > x1)
-				x0--;
+			{
+				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+				p0.pos[Y]--;
+				if (d <= 0)
+					d += 2 * dy;
+				else
+				{
+					d += 2 * (dy + dx);
+					p0.pos[X]++;
+				}
+			}
 		}
 	}
 }
 
-void	line_renderer(t_point *p0, t_point *p1, t_data *img)
+static void	straight_line(t_point p0, t_point p1, t_data *img, int scale)
 {
-	if (p0->pos[X] == p1->pos[X] || p0->pos[Y] == p1->pos[Y])
-		straight_line(p0, p1, img);
-//	else if (p0->pos[X] < p1->pos[X])
-//		other_line(*p0, *p1, img);
-//	else
-//		other_line(*p1, *p0, img);
+	p0.pos[X] *= scale;
+	p0.pos[Y] *= scale;
+	p1.pos[X] *= scale;
+	p1.pos[Y] *= scale;
+	if (p0.pos[X] == p1.pos[X])
+	{
+		while (p0.pos[Y] < p1.pos[Y])
+		{
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], BLUE);
+			if (p0.pos[Y] < p1.pos[Y])
+				p0.pos[Y]++;
+			else
+				p0.pos[Y]--;
+		}
+	}
+	else
+	{
+		while (p0.pos[X] < p1.pos[X])
+		{
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], GREEN);
+			if (p0.pos[X] < p1.pos[X])
+				p0.pos[X]++;
+			else if (p0.pos[X] > p1.pos[X])
+				p0.pos[X]--;
+		}
+	}
+}
+
+void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale)
+{
+	if (p0->pos[X] == p1->pos[X])
+	{
+		if (p0->pos[Y] < p1->pos[Y])
+			straight_line(*p0, *p1, img, scale);
+		else
+			straight_line(*p1, *p0, img, scale);
+	}
+	else if (p0->pos[Y] ==  p1->pos[Y])
+	{
+		if (p0->pos[X] < p1->pos[X])
+			straight_line(*p0, *p1, img, scale);
+		else
+			straight_line(*p1, *p0, img, scale);
+	}
+	else if (p0->pos[X] < p1->pos[X])
+		other_line(*p0, *p1, img, scale);
+	else
+		other_line(*p1, *p0, img, scale);
 }

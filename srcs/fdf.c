@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/09 10:49:46 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:54:47 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char *argv[])
 	load_map(&map, argv[1]);
 	start_mlx(&vars, &data);
 	// Whatever goes after initialization && hooks
+	printf("Map limits: [%d X]  [%d Y]  [%d Z]\n", map.limits[X], map.limits[Y], map.limits[Z]);
 	if (draw_screen(&map, &vars, &data) < 0)
 		ft_printf("Error_4: Bad draw screen\n");
 	// Hooks
@@ -67,5 +68,4 @@ int	main(int argc, char *argv[])
 
 /*
 	printf("Map limits: [%.2f X]  [%.2f Y]  [%.2f Z]\n", map.limits[X], map.limits[Y], map.limits[Z]);
-	printf("Random point parameters: [%2.f X]  [%2.f Y]  [%2.f Z]\n\n", map.points[2].pos[X], map.points[2].pos[Y], map.points[2].pos[Z]);
 */

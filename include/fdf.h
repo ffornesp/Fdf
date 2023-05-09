@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/08 16:44:07 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:22:38 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_vars
 
 typedef struct s_point
 {
-	float	pos[3];
+	int		pos[3];
 	int		color;
 	int		hex_color;
 }			t_point;
@@ -42,7 +42,7 @@ typedef struct s_point
 typedef struct s_map
 {
 	char	*fdf_file;
-	float	limits[3];
+	int		limits[3];
 	int		len;
 	t_point	*points;
 }			t_map;
@@ -59,7 +59,7 @@ int		draw_screen(t_map *map, t_vars *vars, t_data *data);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-void	line_renderer(t_point *p0, t_point *p1, t_data *img);
+void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale);
 
 int		key_hook(int keycode, t_vars *vars);
 

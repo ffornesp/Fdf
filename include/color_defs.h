@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 16:02:08 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/02 12:04:03 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:22:07 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define RED	0x00FF0000
 # define GREEN 	0x0000FF00
 # define BLUE 	0x000000FF
+
+# define YELLOW 0x00FFFF00
+
 # define BLACK 	0x00000000
 
 #endif

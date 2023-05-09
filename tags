@@ -78,6 +78,7 @@ buffer	mlx/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s
 bytes_per_pixel	mlx/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RGB, 4:RGBA *\/ $/;"	m	struct:__anon1	file:
 c_color	srcs/us/colors.c	/^int	c_color(unsigned char t, unsigned char r, unsigned char g, unsigned char b)$/;"	f
 calc_size	libft/srcs/ft_itoa.c	/^static void	calc_size(long int n, size_t *size)$/;"	f	file:
+center_image	srcs/draw_screen.c	/^static void	center_image(t_map *map, t_vars *vars, t_data *data, int scale)$/;"	f	file:
 col	mlx/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	include/fdf.h	/^	int		color;$/;"	m	struct:s_point
 color	mlx/mlx_xpm.c	/^  int   color;$/;"	m	struct:s_col_name	file:
@@ -164,8 +165,8 @@ is_whitespace	libft/srcs/ft_atoi_base.c	/^static int	is_whitespace(char const c)
 key_hook	srcs/key_hook.c	/^int	key_hook(int keycode, t_vars *vars)$/;"	f
 l_len	include/fdf.h	/^	int		l_len;$/;"	m	struct:s_data
 len	include/fdf.h	/^	int		len;$/;"	m	struct:s_map
-limits	include/fdf.h	/^	float	limits[3];$/;"	m	struct:s_map
-line_renderer	srcs/line_renderer.c	/^void	line_renderer(t_point *p0, t_point *p1, t_data *img)$/;"	f
+limits	include/fdf.h	/^	int		limits[3];$/;"	m	struct:s_map
+line_renderer	srcs/line_renderer.c	/^void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale)$/;"	f
 load_map	srcs/fdf.c	/^void	load_map(t_map *map, char *fdf_file)$/;"	f
 loc_font_atlassize	mlx/mlx_int.h	/^  GLint		loc_font_atlassize;$/;"	m	struct:glsl_info_s
 loc_font_color	mlx/mlx_int.h	/^  GLint		loc_font_color;$/;"	m	struct:glsl_info_s
@@ -224,6 +225,7 @@ next	libft/include/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:s
 next	mlx/mlx_int.h	/^  struct mlx_img_ctx_s	*next;$/;"	m	struct:mlx_img_ctx_s	typeref:struct:mlx_img_ctx_s::mlx_img_ctx_s
 next	mlx/mlx_int.h	/^  struct mlx_img_list_s	*next;$/;"	m	struct:mlx_img_list_s	typeref:struct:mlx_img_list_s::mlx_img_list_s
 next	mlx/mlx_int.h	/^  struct mlx_win_list_s	*next;$/;"	m	struct:mlx_win_list_s	typeref:struct:mlx_win_list_s::mlx_win_list_s
+other_line	srcs/line_renderer.c	/^static void	other_line(t_point p0, t_point p1, t_data *img, int scale)$/;"	f	file:
 parse_map	srcs/parse_input.c	/^char	*parse_map(int fd)$/;"	f
 pixel_data	mlx/font.c	/^  unsigned char	 pixel_data[1140 * 20 * 4 + 1];$/;"	m	struct:__anon1	file:
 pixel_fshader	mlx/mlx_int.h	/^  GLuint	pixel_fshader;$/;"	m	struct:glsl_info_s
@@ -231,7 +233,7 @@ pixel_program	mlx/mlx_int.h	/^  GLuint	pixel_program;$/;"	m	struct:glsl_info_s
 pixel_vshader	mlx/mlx_int.h	/^  GLuint	pixel_vshader;$/;"	m	struct:glsl_info_s
 pixmgt	mlx/mlx_int.h	/^  int			pixmgt;$/;"	m	struct:mlx_win_list_s
 points	include/fdf.h	/^	t_point	*points;$/;"	m	struct:s_map
-pos	include/fdf.h	/^	float	pos[3];$/;"	m	struct:s_point
+pos	include/fdf.h	/^	int		pos[3];$/;"	m	struct:s_point
 print_c	libft/ft_printf/srcs/print_c.c	/^int	print_c(va_list args, int count)$/;"	f
 print_d	libft/ft_printf/srcs/print_d.c	/^int	print_d(va_list args, int count)$/;"	f
 print_p	libft/ft_printf/srcs/print_p.c	/^int	print_p(va_list args, int count)$/;"	f
@@ -252,7 +254,7 @@ save_string	libft/srcs/ft_split.c	/^static char	**save_string(const char *s, cha
 set_limit_z	srcs/set_points.c	/^static void	set_limit_z(t_map *map)$/;"	f	file:
 set_point_coords	srcs/set_points.c	/^static void	set_point_coords(t_point *point, int x, int y, char *line)$/;"	f	file:
 start_mlx	srcs/fdf.c	/^static void	start_mlx(t_vars *vars, t_data *data)$/;"	f	file:
-straight_line	srcs/line_renderer.c	/^static void	straight_line(t_point *p0, t_point *p1, t_data *img)$/;"	f	file:
+straight_line	srcs/line_renderer.c	/^static void	straight_line(t_point p0, t_point p1, t_data *img, int scale)$/;"	f	file:
 t_data	include/fdf.h	/^}			t_data;$/;"	t	typeref:struct:s_data
 t_list	libft/include/libft.h	/^}	t_list;$/;"	t	typeref:struct:s_list
 t_map	include/fdf.h	/^}			t_map;$/;"	t	typeref:struct:s_map

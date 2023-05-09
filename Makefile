@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/08 16:43:29 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/09 11:34:35 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ m_mlx:
 			@rm ERRORS
 
 $(NAME):	m_libft m_mlx $(OBJS_DIR) $(OBJS)
-			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
+			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm -o $@
 
 $(OBJS_DIR):
 						@mkdir $@
