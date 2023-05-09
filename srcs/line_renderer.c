@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/08 17:57:22 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:31:15 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,35 @@ static void	other_line(t_point p0, t_point p1, t_data *img)
 
 static void	straight_line(t_point *p0, t_point *p1, t_data *img)
 {
-	float	x;
-	float	y;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
 
-	x = p0->pos[X];
-	y = p0->pos[Y];
-	if (p0->pos[X] == p1->pos[X]) // VERTICAL
+	x0 = (int)p0->pos[X] * 40;
+	y0 = (int)p0->pos[Y] * 40;
+	x1 = (int)p1->pos[X] * 40;
+	y1 = (int)p1->pos[Y] * 40;
+	if (x0 == x1) // VERTICAL
 	{
-		while (y != p1->pos[Y])
+		while (y0 != y1)
 		{
-			my_mlx_pixel_put(img, p0->pos[X], p0->pos[Y], BLUE);
-			if (y < p1->pos[Y])
-				y++;
+			my_mlx_pixel_put(img, x0, y0, BLUE);
+			if (y0 < y1)
+				y0++;
 			else
-				y--;
+				y0--;
 		}
 	}
-	else if (p0->pos[Y] == p1->pos[Y])
+	else if (y0 == y1)
 	{
-		while (x <= p1->pos[X])
+		while (x0 != x1)
 		{
-			printf("X0 = %f, X1 = %f\n", x, p1->pos[X]);
-			my_mlx_pixel_put(img, x, y, GREEN);
-			if (x < p1->pos[X])
-				x++;
-			else if (x > p1->pos[X])
-				x--;
-			else
-				break ;
+			my_mlx_pixel_put(img, x0, y0, GREEN);
+			if (x0 < x1)
+				x0++;
+			else if (x0 > x1)
+				x0--;
 		}
 	}
 }
