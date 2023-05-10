@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/09 17:30:16 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:20:41 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,64 +27,61 @@ static void	other_line(t_point p0, t_point p1, t_data *img, int scale)
 	dx = p1.pos[X] - p0.pos[X];
 	dy = p1.pos[Y] - p0.pos[Y];
 	d = 2 * dy - dx;
-	if (dy < 0)
-		d = 2 * dx + dy;
+	if (dy > dx)
+		d = 2 * dx - dy;
 	while (p0.pos[X] <= p1.pos[X] && p0.pos[Y] <= p1.pos[Y])
 	{
-		if (dy > 0)
+		my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
+		if (dx > dy)
 		{
-			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
-			if (dx > dy)
-			{
-				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
-				p0.pos[X]++;
-				if (d <= 0)
-					d += 2 * dy;
-				else
-				{
-					d += 2 * (dy - dx);
-					p0.pos[Y]++;
-				}
-			}
+			p0.pos[X]++;
+			if (d <= 0)
+				d += 2 * dy;
 			else
 			{
-				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+				d += 2 * (dy - dx);
 				p0.pos[Y]++;
-				if (d <= 0)
-					d += 2 * dx;
-				else
-				{
-					d += 2 * (dx - dy);
-					p0.pos[X]++;
-				}
 			}
 		}
 		else
 		{
-			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
-			if (dx > dy)
-			{
-				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
-				p0.pos[X]++;
-				if (d > 0)
-					d += 2 * dx;
-				else
-				{
-					d += 2 * (dx + dy);
-					p0.pos[Y]--;
-				}
-			}
+			p0.pos[Y]++;
+			if (d <= 0)
+				d += 2 * dx;
 			else
 			{
-				my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+				d += 2 * (dx - dy);
+				p0.pos[X]++;
+			}
+		}
+	}
+	d = 2 * (dx + dy);
+	if (-dy > dx)
+		d = 2 * (-dy + dx);
+	while (p0.pos[X] <= p1.pos[X] && p0.pos[Y] >= p1.pos[Y])
+	{
+		if (dy < 0 && -dy < dx)
+		{
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], YELLOW);
+			p0.pos[X]++;
+			if (d > 0)
+				d += 2 * dy;
+			else
+			{
+				d += 2 * (dx + dy);
 				p0.pos[Y]--;
-				if (d <= 0)
-					d += 2 * dy;
-				else
-				{
-					d += 2 * (dy + dx);
-					p0.pos[X]++;
-				}
+			}
+		}
+		else
+		{
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
+			p0.pos[Y]--;
+			if (d >= 0)
+				d -= 2 * dx;
+			else
+			{
+				d += 2 * (-dx - dy);
+				p0.pos[X]++;
 			}
 		}
 	}

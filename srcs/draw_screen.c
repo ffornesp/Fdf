@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/09 17:24:42 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:24:42 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,128 +50,6 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 			j = 0;
 		i++;
 	}
-	// STARTS TOP LEFT
-	line_renderer(&map->points[0], &map->points[37], data, scale);
-	line_renderer(&map->points[0], &map->points[56], data, scale);
-	line_renderer(&map->points[0], &map->points[75], data, scale);
-	line_renderer(&map->points[0], &map->points[94], data, scale);
-	line_renderer(&map->points[0], &map->points[113], data, scale);
-	line_renderer(&map->points[0], &map->points[132], data, scale);
-	line_renderer(&map->points[0], &map->points[151], data, scale);
-	line_renderer(&map->points[0], &map->points[170], data, scale);
-	line_renderer(&map->points[0], &map->points[189], data, scale);
-	line_renderer(&map->points[0], &map->points[208], data, scale);
-	// DY > DX
-	line_renderer(&map->points[0], &map->points[191], data, scale);
-	line_renderer(&map->points[0], &map->points[192], data, scale);
-	line_renderer(&map->points[0], &map->points[193], data, scale);
-	line_renderer(&map->points[0], &map->points[194], data, scale);
-	line_renderer(&map->points[0], &map->points[195], data, scale);
-	line_renderer(&map->points[0], &map->points[196], data, scale);
-	line_renderer(&map->points[0], &map->points[197], data, scale);
-	line_renderer(&map->points[0], &map->points[198], data, scale);
-	// DX > DY
-	line_renderer(&map->points[0], &map->points[199], data, scale);
-	line_renderer(&map->points[0], &map->points[200], data, scale);
-	line_renderer(&map->points[0], &map->points[201], data, scale);
-	line_renderer(&map->points[0], &map->points[202], data, scale);
-	line_renderer(&map->points[0], &map->points[203], data, scale);
-	line_renderer(&map->points[0], &map->points[204], data, scale);
-	line_renderer(&map->points[0], &map->points[205], data, scale);
-	line_renderer(&map->points[0], &map->points[206], data, scale);
-	line_renderer(&map->points[0], &map->points[207], data, scale);
-	// STARTS TOP RIGHT
-	line_renderer(&map->points[18], &map->points[19], data, scale);
-	line_renderer(&map->points[18], &map->points[38], data, scale);
-	line_renderer(&map->points[18], &map->points[57], data, scale);
-	line_renderer(&map->points[18], &map->points[76], data, scale);
-	line_renderer(&map->points[18], &map->points[95], data, scale);
-	line_renderer(&map->points[18], &map->points[114], data, scale);
-	line_renderer(&map->points[18], &map->points[133], data, scale);
-	line_renderer(&map->points[18], &map->points[152], data, scale);
-	line_renderer(&map->points[18], &map->points[171], data, scale);
-	line_renderer(&map->points[18], &map->points[190], data, scale);
-	// DY > DX
-	line_renderer(&map->points[18], &map->points[0], data, scale);
-	line_renderer(&map->points[18], &map->points[191], data, scale);
-	line_renderer(&map->points[18], &map->points[192], data, scale);
-	line_renderer(&map->points[18], &map->points[193], data, scale);
-	line_renderer(&map->points[18], &map->points[194], data, scale);
-	line_renderer(&map->points[18], &map->points[195], data, scale);
-	line_renderer(&map->points[18], &map->points[196], data, scale);
-	line_renderer(&map->points[18], &map->points[197], data, scale);
-	// DX > DY
-	line_renderer(&map->points[18], &map->points[198], data, scale);
-	line_renderer(&map->points[18], &map->points[199], data, scale);
-	line_renderer(&map->points[18], &map->points[200], data, scale);
-	line_renderer(&map->points[18], &map->points[201], data, scale);
-	line_renderer(&map->points[18], &map->points[202], data, scale);
-	line_renderer(&map->points[18], &map->points[203], data, scale);
-	line_renderer(&map->points[18], &map->points[204], data, scale);
-	line_renderer(&map->points[18], &map->points[205], data, scale);
-	line_renderer(&map->points[18], &map->points[206], data, scale);
-	//STARTS BOTTOM LEFT
-	// DY > DX
-	line_renderer(&map->points[190], &map->points[1], data, scale);
-	line_renderer(&map->points[190], &map->points[2], data, scale);
-	line_renderer(&map->points[190], &map->points[3], data, scale);
-	line_renderer(&map->points[190], &map->points[4], data, scale);
-	line_renderer(&map->points[190], &map->points[5], data, scale);
-	line_renderer(&map->points[190], &map->points[6], data, scale);
-	line_renderer(&map->points[190], &map->points[7], data, scale);
-	line_renderer(&map->points[190], &map->points[8], data, scale);
-	line_renderer(&map->points[190], &map->points[9], data, scale);
-	line_renderer(&map->points[190], &map->points[10], data, scale);
-	// DX > DY
-	line_renderer(&map->points[190], &map->points[11], data, scale);
-	line_renderer(&map->points[190], &map->points[12], data, scale);
-	line_renderer(&map->points[190], &map->points[13], data, scale);
-	line_renderer(&map->points[190], &map->points[14], data, scale);
-	line_renderer(&map->points[190], &map->points[15], data, scale);
-	line_renderer(&map->points[190], &map->points[16], data, scale);
-	line_renderer(&map->points[190], &map->points[17], data, scale);
-	line_renderer(&map->points[190], &map->points[18], data, scale);
-	//
-	line_renderer(&map->points[190], &map->points[19], data, scale);
-	line_renderer(&map->points[190], &map->points[38], data, scale);
-	line_renderer(&map->points[190], &map->points[57], data, scale);
-	line_renderer(&map->points[190], &map->points[76], data, scale);
-	line_renderer(&map->points[190], &map->points[95], data, scale);
-	line_renderer(&map->points[190], &map->points[114], data, scale);
-	line_renderer(&map->points[190], &map->points[133], data, scale);
-	line_renderer(&map->points[190], &map->points[152], data, scale);
-	line_renderer(&map->points[190], &map->points[171], data, scale);
-	// STARTS BOTTOM RIGHT
-	line_renderer(&map->points[208], &map->points[0], data, scale);
-	line_renderer(&map->points[208], &map->points[19], data, scale);
-	line_renderer(&map->points[208], &map->points[38], data, scale);
-	line_renderer(&map->points[208], &map->points[57], data, scale);
-	line_renderer(&map->points[208], &map->points[76], data, scale);
-	line_renderer(&map->points[208], &map->points[95], data, scale);
-	line_renderer(&map->points[208], &map->points[114], data, scale);
-	line_renderer(&map->points[208], &map->points[133], data, scale);
-	line_renderer(&map->points[208], &map->points[152], data, scale);
-	line_renderer(&map->points[208], &map->points[171], data, scale);
-	// DY > DX
-	line_renderer(&map->points[208], &map->points[1], data, scale);
-	line_renderer(&map->points[208], &map->points[2], data, scale);
-	line_renderer(&map->points[208], &map->points[3], data, scale);
-	line_renderer(&map->points[208], &map->points[4], data, scale);
-	line_renderer(&map->points[208], &map->points[5], data, scale);
-	line_renderer(&map->points[208], &map->points[6], data, scale);
-	line_renderer(&map->points[208], &map->points[7], data, scale);
-	line_renderer(&map->points[208], &map->points[8], data, scale);
-	// DX > DY
-	line_renderer(&map->points[208], &map->points[9], data, scale);
-	line_renderer(&map->points[208], &map->points[10], data, scale);
-	line_renderer(&map->points[208], &map->points[11], data, scale);
-	line_renderer(&map->points[208], &map->points[12], data, scale);
-	line_renderer(&map->points[208], &map->points[13], data, scale);
-	line_renderer(&map->points[208], &map->points[14], data, scale);
-	line_renderer(&map->points[208], &map->points[15], data, scale);
-	line_renderer(&map->points[208], &map->points[16], data, scale);
-	line_renderer(&map->points[208], &map->points[17], data, scale);
-
 	center_image(map, vars, data, scale);
 	return (1);
 }
