@@ -38,3 +38,6 @@ Graphic mngmnt:	Your program has to display the image in a window.
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 REMEMBER !!! mlx_put_image_to_window(vars->mlx, vars->win, data->img, X, Y);
 			 my_mlx_pixel_put(data, X, Y, COLOR);
+
+Rotate X Y with (x - y) * sin (120) 
+				(x + y) * cos (120)

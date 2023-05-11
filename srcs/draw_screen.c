@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/10 13:55:31 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/11 13:26:14 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 
 	i = 0;
 	j = 0;
-	scale = 80;
+	scale = 50;
 	k = map->limits[X];	
 	while (i < (map->limits[X] * map->limits[Y]))
 	{
@@ -50,6 +50,7 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 			j = 0;
 		i++;
 	}
+	/*
 	// TOP LEFT
 	line_renderer(&map->points[0], &map->points[37], data, scale);
 	line_renderer(&map->points[0], &map->points[56], data, scale);
@@ -162,7 +163,7 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 	line_renderer(&map->points[208], &map->points[15], data, scale);
 	line_renderer(&map->points[208], &map->points[16], data, scale);
 	line_renderer(&map->points[208], &map->points[17], data, scale);
-
+	*/
 	center_image(map, vars, data, scale);
 	return (1);
 }
