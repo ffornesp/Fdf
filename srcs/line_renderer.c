@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/11 13:26:22 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:22:46 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,27 @@
 #include <stdlib.h>
 #include <math.h>
 
-static void	other_line(t_point p0, t_point p1, t_data *img, int scale)
+static void	other_line(t_point *p, t_data *img)
 {
 	int		*k;
-	t_point	*p;
+	t_point	aux;
 
-	p0.pos[X] *= scale;
-	p0.pos[Y] *= scale;
-	p1.pos[X] *= scale;
-	p1.pos[Y] *= scale;
 	k = malloc(sizeof(int) * 2);
-	k[X] = p1.pos[X] - p0.pos[X];
-	k[Y] = p1.pos[Y] - p0.pos[Y];
-	p = malloc(sizeof(t_point) * 2);
-	p[0] = p0;
-	p[1] = p1;
+	k[X] = p[1].pos[X] - p[0].pos[X];
+	k[Y] = p[1].pos[Y] - p[0].pos[Y];
+	if (p[1].pos[X] < p[0].pos[X])
+	{
+		aux = p[0];
+		p[0] = p[1];
+		p[1] = aux;
+	}
+//	ft_printf("[X %d | Y %d]     [X %d | Y %d]\n", p[0].pos[X], p[0].pos[Y], p[1].pos[X], p[1].pos[Y]);
 	calculate_line(k, p, img);
 	free(k);
-	free(p);
 }
 
-static void	straight_line(t_point p0, t_point p1, t_data *img, int scale)
+static void	straight_line(t_point p0, t_point p1, t_data *img)
 {
-	p0.pos[X] *= scale;
-	p0.pos[Y] *= scale;
-	p1.pos[X] *= scale;
-	p1.pos[Y] *= scale;
 	if (p0.pos[X] == p1.pos[X])
 	{
 		while (p0.pos[Y] < p1.pos[Y])
@@ -66,24 +61,45 @@ static void	straight_line(t_point p0, t_point p1, t_data *img, int scale)
 	}
 }
 
+static t_point *calculate_line_limits(t_point *p0, t_point *p1, int scale)
+{
+	t_point	*p;
+
+	p = malloc(sizeof(t_point) * 2);
+	p[0] = *p0;
+	p[1] = *p1;
+	p[0].pos[X] = (p0->pos[X] * scale - p0->pos[Y] * scale) * cos(120);
+	p[0].pos[Y] = (p0->pos[X] * scale + p0->pos[Y] * scale) * sin(120);
+	p[0].pos[X] += 20 * scale;
+	p[0].pos[Y] += p[0].pos[Z] * -5 + (scale * 4);
+	p[1].pos[X] = (p1->pos[X] * scale - p1->pos[Y] * scale) * cos(120);
+	p[1].pos[Y] = (p1->pos[X] * scale + p1->pos[Y] * scale) * sin(120);
+	p[1].pos[X] += 20 * scale;
+	p[1].pos[Y] += p[1].pos[Z] * -5 + (scale * 4);
+	return (p);
+}
+
 void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale)
 {
-	if (p0->pos[X] == p1->pos[X])
+	t_point	*p;
+
+	p = calculate_line_limits(p0, p1, scale);
+//	ft_printf("[X %d | Y %d]     [X %d | Y %d]\n", p[0].pos[X], p[0].pos[Y], p[1].pos[X], p[1].pos[Y]);
+	if (p[0].pos[X] == p[1].pos[X])
 	{
-		if (p0->pos[Y] < p1->pos[Y])
-			straight_line(*p0, *p1, img, scale);
+		if (p[0].pos[Y] < p[1].pos[Y])
+			straight_line(p[0], p[1], img);
 		else
-			straight_line(*p1, *p0, img, scale);
+			straight_line(p[1], p[0], img);
 	}
-	else if (p0->pos[Y] ==  p1->pos[Y])
+	else if (p[0].pos[Y] ==  p[1].pos[Y])
 	{
-		if (p0->pos[X] < p1->pos[X])
-			straight_line(*p0, *p1, img, scale);
+		if (p[0].pos[X] < p[1].pos[X])
+			straight_line(p[0], p[1], img);
 		else
-			straight_line(*p1, *p0, img, scale);
+			straight_line(p[1], p[0], img);
 	}
-	else if (p0->pos[X] < p1->pos[X])
-		other_line(*p0, *p1, img, scale);
 	else
-		other_line(*p1, *p0, img, scale);
+		other_line(p, img);
+	free(p);
 }
