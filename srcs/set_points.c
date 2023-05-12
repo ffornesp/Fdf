@@ -6,11 +6,12 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:41:07 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/11 17:57:55 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:28:51 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 #include "fdf.h"
 #include <stdlib.h>
 
@@ -72,8 +73,9 @@ void	map_set_points(t_map *map)
 			set_point_coords(&map->points[n++], j, i, s_line[j]);
 			free(s_line[j++]);
 		}
-		free(m_lines[i++]);
+		free(m_lines[i]);
 		free(s_line);
+		i++;
 	}
 	set_limit_z(map);
 	free(m_lines);

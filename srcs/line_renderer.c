@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 12:05:16 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:29:29 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	other_line(t_point *p, t_data *img)
 	}
 	k[X] = p[1].pos[X] - p[0].pos[X];
 	k[Y] = p[1].pos[Y] - p[0].pos[Y];
-//	ft_printf("[X %d | Y %d]     [X %d | Y %d]\n", p[0].pos[X], p[0].pos[Y], p[1].pos[X], p[1].pos[Y]);
 	calculate_line(k, p, img);
 	free(k);
 }
@@ -64,18 +63,26 @@ static void	straight_line(t_point p0, t_point p1, t_data *img)
 static t_point *calculate_line_limits(t_point *p0, t_point *p1, int scale)
 {
 	t_point	*p;
+	t_point a;
+	t_point b;
 
 	p = malloc(sizeof(t_point) * 2);
 	p[0] = *p0;
 	p[1] = *p1;
-	p[0].pos[X] = (p0->pos[X] * scale - p0->pos[Y] * scale) * cos(120);
-	p[0].pos[Y] = (p0->pos[X] * scale + p0->pos[Y] * scale) * sin(120);
-	p[0].pos[X] += 20 * scale;
-	p[0].pos[Y] += p[0].pos[Z] * -4 + (scale * 3);
-	p[1].pos[X] = (p1->pos[X] * scale - p1->pos[Y] * scale) * cos(120);
-	p[1].pos[Y] = (p1->pos[X] * scale + p1->pos[Y] * scale) * sin(120);
-	p[1].pos[X] += 20 * scale;
-	p[1].pos[Y] += p[1].pos[Z] * -4 + (scale * 3);
+	p[0].pos[X] *= scale;
+	p[0].pos[Y] *= scale;
+	p[1].pos[X] *= scale;
+	p[1].pos[Y] *= scale;
+	a = p[0];
+	b = p[1];
+	p[0].pos[X] = (a.pos[X] - a.pos[Y]) * cos(120);
+	p[0].pos[Y] = (a.pos[X] + a.pos[Y]) * sin(120);
+	p[1].pos[X] = (b.pos[X] - b.pos[Y]) * cos(120);
+	p[1].pos[Y] = (b.pos[X] + b.pos[Y]) * sin(120);
+	p[0].pos[X] += 1920 / 2;
+	p[1].pos[X] += 1920 / 2;
+	p[0].pos[Y] += p[0].pos[Z] * -3 + 1080 / 2;
+	p[1].pos[Y] += p[1].pos[Z] * -3 + 1080 / 2;
 	return (p);
 }
 
@@ -84,7 +91,6 @@ void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale)
 	t_point	*p;
 
 	p = calculate_line_limits(p0, p1, scale);
-//	ft_printf("[X %d | Y %d]     [X %d | Y %d]\n", p[0].pos[X], p[0].pos[Y], p[1].pos[X], p[1].pos[Y]);
 	if (p[0].pos[X] == p[1].pos[X])
 	{
 		if (p[0].pos[Y] < p[1].pos[Y])

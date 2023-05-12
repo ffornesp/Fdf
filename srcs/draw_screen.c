@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 11:46:23 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:29:16 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 #include "mlx.h"
 #include <math.h>
 
-/* 		To center image: 
-* 		(WINDOW_SIZE_X - IMAGE_SIZE_X) / 2 ... (WINDOW_SIZE_Y - IMAGE_SIZE_Y) / 2
-* 		where IMAGE_SIZE is MAP_LIMITS_X * SCALE
-*
-static void	center_image(t_map *map, t_vars *vars, t_data *data, int scale)
+/*static void	center_image(t_map *map, t_vars *vars, t_data *data, int scale)
 {
 	int	s1;
 	int	s2;
@@ -29,6 +25,17 @@ static void	center_image(t_map *map, t_vars *vars, t_data *data, int scale)
 	s2 = (1080 - map->limits[Y] * scale) / 2;
 	mlx_put_image_to_window(vars->mlx, vars->win, data->img, s1, s2);
 }*/
+
+static int	calculate_scale(int win_size, t_map *map)
+{
+	int	scale;
+
+	scale = 1;
+	while ((map->limits[X] - 1) * scale < win_size / 4)
+		scale++;
+	return (scale--);
+	//else invert axis of calculation
+}
 
 int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 {
@@ -39,7 +46,8 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 
 	i = 0;
 	j = 0;
-	scale = 40;
+	scale = calculate_scale(1920, map);
+	ft_printf("Scale is: %d\n", scale);
 	k = map->limits[X];
 	while (i < (map->limits[X] * map->limits[Y]))
 	{

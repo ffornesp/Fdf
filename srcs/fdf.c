@@ -6,17 +6,13 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/09 12:54:47 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:37:38 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "libft.h"
 #include "ft_printf.h"
 #include "fdf.h"
-#include "color_defs.h"
 #include "mlx.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -52,8 +48,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	load_map(&map, argv[1]);
 	start_mlx(&vars, &data);
-	// Whatever goes after initialization && hooks
-	printf("Map limits: [%d X]  [%d Y]  [%d Z]\n", map.limits[X], map.limits[Y], map.limits[Z]);
+	// Whatever goes after initialization && before hooks
+	ft_printf("Map limits: [%d X]  [%d Y]  [%d Z]\n", map.limits[X], map.limits[Y], map.limits[Z]);
 	if (draw_screen(&map, &vars, &data) < 0)
 		ft_printf("Error_4: Bad draw screen\n");
 	// Hooks
