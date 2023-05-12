@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/11 20:22:46 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:05:16 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static void	other_line(t_point *p, t_data *img)
 	t_point	aux;
 
 	k = malloc(sizeof(int) * 2);
-	k[X] = p[1].pos[X] - p[0].pos[X];
-	k[Y] = p[1].pos[Y] - p[0].pos[Y];
 	if (p[1].pos[X] < p[0].pos[X])
 	{
 		aux = p[0];
 		p[0] = p[1];
 		p[1] = aux;
 	}
+	k[X] = p[1].pos[X] - p[0].pos[X];
+	k[Y] = p[1].pos[Y] - p[0].pos[Y];
 //	ft_printf("[X %d | Y %d]     [X %d | Y %d]\n", p[0].pos[X], p[0].pos[Y], p[1].pos[X], p[1].pos[Y]);
 	calculate_line(k, p, img);
 	free(k);
@@ -71,11 +71,11 @@ static t_point *calculate_line_limits(t_point *p0, t_point *p1, int scale)
 	p[0].pos[X] = (p0->pos[X] * scale - p0->pos[Y] * scale) * cos(120);
 	p[0].pos[Y] = (p0->pos[X] * scale + p0->pos[Y] * scale) * sin(120);
 	p[0].pos[X] += 20 * scale;
-	p[0].pos[Y] += p[0].pos[Z] * -5 + (scale * 4);
+	p[0].pos[Y] += p[0].pos[Z] * -4 + (scale * 3);
 	p[1].pos[X] = (p1->pos[X] * scale - p1->pos[Y] * scale) * cos(120);
 	p[1].pos[Y] = (p1->pos[X] * scale + p1->pos[Y] * scale) * sin(120);
 	p[1].pos[X] += 20 * scale;
-	p[1].pos[Y] += p[1].pos[Z] * -5 + (scale * 4);
+	p[1].pos[Y] += p[1].pos[Z] * -4 + (scale * 3);
 	return (p);
 }
 

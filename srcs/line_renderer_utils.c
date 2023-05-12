@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:04:21 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/11 20:25:31 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:10:30 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	calculate_line(int *k, t_point *p, t_data *img)
 {
 	int	d;
 
-	ft_printf("[X %d | Y %d]     [X %d | Y %d]\n", p[0].pos[X], p[0].pos[Y], p[1].pos[X], p[1].pos[Y]);
 	if (p[0].pos[Y] < p[1].pos[Y])
 	{
 		d = 2 * k[Y] - k[X];
@@ -89,7 +88,7 @@ void	calculate_line(int *k, t_point *p, t_data *img)
 			d = 2 * (-k[Y] + k[X]);
 		while (p[0].pos[X] <= p[1].pos[X] && p[0].pos[Y] >= p[1].pos[Y])
 		{
-			my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], YELLOW);
+			my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], RED);
 			line_case_2(&d, k, p);
 		}
 	}
