@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 17:37:38 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:52:04 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static void	start_mlx(t_vars *vars, t_data *data)
+static void	start_mlx(t_vars *vars, t_data *d)
 {
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, 1920, 1080, "ffornes- Fdf");
-	data->img = mlx_new_image(vars->mlx, 1920, 1080);
-	data->addr = mlx_get_data_addr(data->img, &data->bpps, &data->l_len, &data->endian);
-	mlx_put_image_to_window(vars->mlx, vars->win, data->img, 0, 0);
+	d->img = mlx_new_image(vars->mlx, 1920, 1080);
+	d->addr = mlx_get_data_addr(d->img, &d->bpps, &d->l_len, &d->endian);
+	mlx_put_image_to_window(vars->mlx, vars->win, d->img, 0, 0);
 }
 
 void	load_map(t_map *map, char *fdf_file)
@@ -61,7 +61,3 @@ int	main(int argc, char *argv[])
 	free(map.points);
 	return (0);
 }
-
-/*
-	printf("Map limits: [%.2f X]  [%.2f Y]  [%.2f Z]\n", map.limits[X], map.limits[Y], map.limits[Z]);
-*/

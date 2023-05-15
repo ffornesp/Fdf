@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:04:21 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 12:09:00 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:05:05 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	line_case_1(int *d, int *k, t_point *p)
 
 static void	line_case_2(int *d, int *k, t_point *p)
 {
-	if (k[Y] < 0 && -k[Y] < k[X])
+	if (k[Y] < 0 && -1 * k[Y] < k[X])
 	{
 		p[0].pos[X]++;
 		if (*d > 0)
@@ -66,6 +66,22 @@ static void	line_case_2(int *d, int *k, t_point *p)
 	}
 }
 
+static int	get_color(t_point *p)
+{
+	if (p[0].color != WHITE)
+		return (p[0].color);
+	else if (p[1].color != WHITE)
+		return (p[1].color);
+	return (WHITE);
+}
+
+void	draw_check(t_point *p, t_data *img, int color)
+{
+	if (p[0].pos[X] >= 0 && p[0].pos[X] <= 1919
+		&& p[0].pos[Y] >= 0 && p[0].pos[Y] <= 1079)
+		my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], color);
+}
+
 void	calculate_line(int *k, t_point *p, t_data *img)
 {
 	int	d;
@@ -77,7 +93,7 @@ void	calculate_line(int *k, t_point *p, t_data *img)
 			d = 2 * k[X] - k[Y];
 		while (p[0].pos[X] <= p[1].pos[X] && p[0].pos[Y] <= p[1].pos[Y])
 		{
-			my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], RED);
+			draw_check(p, img, get_color(p));
 			line_case_1(&d, k, p);
 		}
 	}
@@ -86,7 +102,7 @@ void	calculate_line(int *k, t_point *p, t_data *img)
 		d = 2 * (k[X] + k[Y]);
 		while (p[0].pos[X] <= p[1].pos[X] && p[0].pos[Y] >= p[1].pos[Y])
 		{
-			my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], RED);
+			draw_check(p, img, get_color(p));
 			line_case_2(&d, k, p);
 		}
 	}

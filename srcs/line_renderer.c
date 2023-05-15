@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_renderer.c                                    :+:      :+:    :+:   */
+/*   line_renderer_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 12:17:57 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:27:40 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "fdf.h"
 #include "color_defs.h"
 #include <stdlib.h>
@@ -34,45 +33,62 @@ static void	other_line(t_point *p, t_data *img)
 	free(k);
 }
 
-static void	straight_line(t_point p0, t_point p1, t_data *img)
+static void	modify_points(t_point *p0, t_point *p1, int id)
 {
-	if (p0.pos[X] == p1.pos[X])
+	if (id)
 	{
-		while (p0.pos[Y] < p1.pos[Y])
+		if (p0->pos[X] < p1->pos[X])
+			p0->pos[X]++;
+		else
+			p0->pos[X]--;
+	}
+	else
+	{
+		if (p0->pos[Y] < p1->pos[Y])
+			p0->pos[Y]++;
+		else
+			p0->pos[Y]--;
+	}
+}
+
+static void	straight_line(t_point *p, t_data *img)
+{
+	int	color;
+
+	color = WHITE;
+	if (p[0].color == p[1].color)
+		color = p[0].color;
+	if (p[0].pos[X] == p[1].pos[X])
+	{
+		while (p[0].pos[Y] < p[1].pos[Y])
 		{
-			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
-			if (p0.pos[Y] < p1.pos[Y])
-				p0.pos[Y]++;
-			else
-				p0.pos[Y]--;
+			draw_check(p, img, color);
+			modify_points(&p[0], &p[1], 0);
 		}
 	}
 	else
 	{
-		while (p0.pos[X] < p1.pos[X])
+		while (p[0].pos[X] < p[1].pos[X])
 		{
-			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
-			if (p0.pos[X] < p1.pos[X])
-				p0.pos[X]++;
-			else if (p0.pos[X] > p1.pos[X])
-				p0.pos[X]--;
+			draw_check(p, img, color);
+			modify_points(&p[0], &p[1], 1);
 		}
 	}
 }
 
-static t_point *calculate_line_limits(t_point *p0, t_point *p1, int scale)
+static t_point	*calculate_line_limits(t_point *p0, t_point *p1, float *scale)
 {
 	t_point	*p;
-	t_point a;
-	t_point b;
+	t_point	a;
+	t_point	b;
 
 	p = malloc(sizeof(t_point) * 2);
 	p[0] = *p0;
 	p[1] = *p1;
-	p[0].pos[X] *= scale;
-	p[0].pos[Y] *= scale;
-	p[1].pos[X] *= scale;
-	p[1].pos[Y] *= scale;
+	p[0].pos[X] *= scale[0];
+	p[0].pos[Y] *= scale[0];
+	p[1].pos[X] *= scale[0];
+	p[1].pos[Y] *= scale[0];
 	a = p[0];
 	b = p[1];
 	p[0].pos[X] = (a.pos[X] - a.pos[Y]) * cos(120);
@@ -81,12 +97,12 @@ static t_point *calculate_line_limits(t_point *p0, t_point *p1, int scale)
 	p[1].pos[Y] = (b.pos[X] + b.pos[Y]) * sin(120);
 	p[0].pos[X] += 1920 / 2;
 	p[1].pos[X] += 1920 / 2;
-	p[0].pos[Y] += p[0].pos[Z] * -3 + 1080 / 4;
-	p[1].pos[Y] += p[1].pos[Z] * -3 + 1080 / 4;
+	p[0].pos[Y] += p[0].pos[Z] * scale[1] + 1080 / 4;
+	p[1].pos[Y] += p[1].pos[Z] * scale[1] + 1080 / 4;
 	return (p);
 }
 
-void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale)
+void	line_renderer(t_point *p0, t_point *p1, t_data *img, float *scale)
 {
 	t_point	*p;
 
@@ -94,16 +110,16 @@ void	line_renderer(t_point *p0, t_point *p1, t_data *img, int scale)
 	if (p[0].pos[X] == p[1].pos[X])
 	{
 		if (p[0].pos[Y] < p[1].pos[Y])
-			straight_line(p[0], p[1], img);
+			straight_line(p, img);
 		else
-			straight_line(p[1], p[0], img);
+			straight_line(p, img);
 	}
-	else if (p[0].pos[Y] ==  p[1].pos[Y])
+	else if (p[0].pos[Y] == p[1].pos[Y])
 	{
 		if (p[0].pos[X] < p[1].pos[X])
-			straight_line(p[0], p[1], img);
+			straight_line(p, img);
 		else
-			straight_line(p[1], p[0], img);
+			straight_line(p, img);
 	}
 	else
 		other_line(p, img);

@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:19:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/04/28 15:56:00 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:51:32 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 static char	*read_to_buff(int fd, char *buffer, char *line)
 {
-	int	i;
+	int		i;
+	char	*aux;
 
 	i = BUFFER_SIZE;
 	while (i > 0)
@@ -25,8 +26,10 @@ static char	*read_to_buff(int fd, char *buffer, char *line)
 		i = (int)read(fd, buffer, BUFFER_SIZE);
 		if (i > 0)
 		{
+			aux = line;
 			buffer[i] = '\0';
 			line = ft_strjoin(line, buffer);
+			free(aux);
 			if (ft_strchr(buffer, '\n'))
 				break ;
 		}

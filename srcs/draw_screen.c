@@ -6,53 +6,60 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 11:55:52 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:26:29 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "fdf.h"
 #include "color_defs.h"
 #include "mlx.h"
+#include <stdlib.h>
 #include <math.h>
 
-/*static void	center_image(t_map *map, t_vars *vars, t_data *data, int scale)
+static float	calculate_scale(t_map *map)
 {
-	int	s1;
-	int	s2;
-
-	s1 = (1920 - map->limits[X] * scale) / 2;
-	s2 = (1080 - map->limits[Y] * scale) / 2;
-	mlx_put_image_to_window(vars->mlx, vars->win, data->img, s1, s2);
-}*/
-
-static int	calculate_scale(int win_size, t_map *map)
-{
-	int	scale;
+	float	scale;
 
 	scale = 1;
-	while ((map->limits[X] - 1) * scale < win_size / 3)
-		scale++;
-	return (scale--);
-	//else invert axis of calculation
+	while ((map->limits[X] + map->limits[X] / 2) * scale + 960 < 1920)
+		scale += 0.1f;
+	while ((map->limits[Y] * scale) + (map->limits[Z] * 2.5f) + 270 > 1080)
+		scale -= 0.1f;
+	if (scale > 0)
+		return (scale);
+	return (1);
+}
+
+static float	calculate_scale_z(float scale)
+{
+	float	scale_z;
+
+	scale_z = -2.5f;
+
+	if (scale < 1.5f)
+		scale_z /= 2;
+	if (scale > 5 && scale < 25)
+		scale_z *= 4;
+	return (scale_z);
 }
 
 int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	scale;
+	int		i;
+	int		j;
+	int		k;
+	float	*scale;
 
 	i = 0;
 	j = 0;
-	scale = calculate_scale(1920, map);
-	ft_printf("Scale is: %d\n", scale);
+	scale = malloc(sizeof(int) * 2);
+	scale[0] = calculate_scale(map);
+	scale[1] = calculate_scale_z(scale[0]);
 	k = map->limits[X];
 	while (i < (map->limits[X] * map->limits[Y]))
 	{
-		if (i < k * map->limits[Y] - k)
-			line_renderer(&map->points[i], &map->points[i + k], data, scale);
+		if (i < map->limits[X] * map->limits[Y] - map->limits[X])
+			line_renderer(&map->points[i], &map->points[i] + map->limits[X], data, scale);
 		if (j++ < map->limits[X] - 1)
 			line_renderer(&map->points[i], &map->points[i + 1], data, scale);
 		else
@@ -60,6 +67,6 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 		i++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, data->img, 0, 0);
-	//center_image(map, vars, data, scale);
+	free(scale);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:26 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/08 09:45:07 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:31:14 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*parse_map(int fd)
 	char	*input;
 	char	*aux;
 
-	line = get_next_line(fd);
 	input = ft_strdup("");
+	line = get_next_line(fd);
 	while (line)
 	{
 		aux = input;

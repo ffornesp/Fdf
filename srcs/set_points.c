@@ -6,13 +6,13 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:41:07 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 16:28:51 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:37:19 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
 #include "fdf.h"
+#include "color_defs.h"
 #include <stdlib.h>
 
 static void	set_point_coords(t_point *point, int x, int y, char *line)
@@ -30,6 +30,8 @@ static void	set_point_coords(t_point *point, int x, int y, char *line)
 		i++;
 		point->color = ft_atoi_base((line + i), 16);
 	}
+	else
+		point->color = WHITE;
 }
 
 static void	set_limit_z(t_map *map)
