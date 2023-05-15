@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 17:29:16 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:55:52 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	calculate_scale(int win_size, t_map *map)
 	int	scale;
 
 	scale = 1;
-	while ((map->limits[X] - 1) * scale < win_size / 4)
+	while ((map->limits[X] - 1) * scale < win_size / 3)
 		scale++;
 	return (scale--);
 	//else invert axis of calculation

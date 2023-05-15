@@ -6,10 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:04:21 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 17:26:57 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 12:09:00 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "fdf.h"
 #include "color_defs.h"
 
@@ -55,7 +56,7 @@ static void	line_case_2(int *d, int *k, t_point *p)
 	else
 	{
 		p[0].pos[Y]--;
-		if (*d >= 0)
+		if (*d > 0)
 			*d -= 2 * k[X];
 		else
 		{
@@ -83,8 +84,6 @@ void	calculate_line(int *k, t_point *p, t_data *img)
 	else
 	{
 		d = 2 * (k[X] + k[Y]);
-		if (-k[Y] > k[X])
-			d = 2 * (-k[Y] + k[X]);
 		while (p[0].pos[X] <= p[1].pos[X] && p[0].pos[Y] >= p[1].pos[Y])
 		{
 			my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], RED);

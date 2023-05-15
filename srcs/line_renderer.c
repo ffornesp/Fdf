@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/12 17:29:29 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/15 12:17:57 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	straight_line(t_point p0, t_point p1, t_data *img)
 	{
 		while (p0.pos[Y] < p1.pos[Y])
 		{
-			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], BLUE);
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
 			if (p0.pos[Y] < p1.pos[Y])
 				p0.pos[Y]++;
 			else
@@ -51,7 +51,7 @@ static void	straight_line(t_point p0, t_point p1, t_data *img)
 	{
 		while (p0.pos[X] < p1.pos[X])
 		{
-			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], GREEN);
+			my_mlx_pixel_put(img, p0.pos[X], p0.pos[Y], RED);
 			if (p0.pos[X] < p1.pos[X])
 				p0.pos[X]++;
 			else if (p0.pos[X] > p1.pos[X])
@@ -81,8 +81,8 @@ static t_point *calculate_line_limits(t_point *p0, t_point *p1, int scale)
 	p[1].pos[Y] = (b.pos[X] + b.pos[Y]) * sin(120);
 	p[0].pos[X] += 1920 / 2;
 	p[1].pos[X] += 1920 / 2;
-	p[0].pos[Y] += p[0].pos[Z] * -3 + 1080 / 2;
-	p[1].pos[Y] += p[1].pos[Z] * -3 + 1080 / 2;
+	p[0].pos[Y] += p[0].pos[Z] * -3 + 1080 / 4;
+	p[1].pos[Y] += p[1].pos[Z] * -3 + 1080 / 4;
 	return (p);
 }
 
