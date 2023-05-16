@@ -6,66 +6,108 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 18:26:29 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:47:18 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fdf.h"
 #include "color_defs.h"
 #include "mlx.h"
-#include <stdlib.h>
 #include <math.h>
+#include <stdlib.h>
 
-static float	calculate_scale(t_map *map)
+static t_point	*get_points(t_point p0, t_point p1, float *scale, t_point *p)
 {
-	float	scale;
-
-	scale = 1;
-	while ((map->limits[X] + map->limits[X] / 2) * scale + 960 < 1920)
-		scale += 0.1f;
-	while ((map->limits[Y] * scale) + (map->limits[Z] * 2.5f) + 270 > 1080)
-		scale -= 0.1f;
-	if (scale > 0)
-		return (scale);
-	return (1);
+	p[0] = p0;
+	p[1] = p1;
+	p[0].pos[X] *= scale[0];
+	p[0].pos[Y] *= scale[0];
+	p[1].pos[X] *= scale[0];
+	p[1].pos[Y] *= scale[0];
+	return (p);
 }
 
-static float	calculate_scale_z(float scale)
-{
-	float	scale_z;
-
-	scale_z = -2.5f;
-
-	if (scale < 1.5f)
-		scale_z /= 2;
-	if (scale > 5 && scale < 25)
-		scale_z *= 4;
-	return (scale_z);
-}
-
-int	draw_screen(t_map *map, t_vars *vars, t_data *data)
+static void	draw_points(t_map *map, t_data *data, float *scale, t_point pos0)
 {
 	int		i;
 	int		j;
 	int		k;
-	float	*scale;
+	t_point	*p;
 
 	i = 0;
 	j = 0;
-	scale = malloc(sizeof(int) * 2);
-	scale[0] = calculate_scale(map);
-	scale[1] = calculate_scale_z(scale[0]);
 	k = map->limits[X];
+	p = malloc(sizeof(t_point) * 2);
 	while (i < (map->limits[X] * map->limits[Y]))
 	{
 		if (i < map->limits[X] * map->limits[Y] - map->limits[X])
-			line_renderer(&map->points[i], &map->points[i] + map->limits[X], data, scale);
+		{
+			get_points(map->points[i], map->points[i + k], scale, p);
+			line_renderer(p, data, scale, pos0);
+		}
 		if (j++ < map->limits[X] - 1)
-			line_renderer(&map->points[i], &map->points[i + 1], data, scale);
+		{
+			get_points(map->points[i], map->points[i + 1], scale, p);
+			line_renderer(p, data, scale, pos0);
+		}
 		else
 			j = 0;
 		i++;
 	}
+	free(p);
+}
+
+static void	get_limits_drawn(t_map *map, t_point pos0, float *scale)
+{
+	int	i;
+	int	aux;
+
+	i = 0;
+	map->min_d[X] = (map->points[0].pos[X] - map->points[0].pos[Y]) * cos(120);
+	map->min_d[Y] = (map->points[0].pos[X] + map->points[0].pos[Y]) * sin(120);
+	map->min_d[X] += pos0.pos[X];
+	map->min_d[Y] += map->points[0].pos[Z] * scale[1] + pos0.pos[Y];
+	while (i < (map->limits[X] * map->limits[Y]))
+	{
+		aux = (map->points[i].pos[X] - map->points[i].pos[Y]) * cos(120);
+		aux += pos0.pos[X];
+		if (aux < map->min_d[X])
+			map->min_d[X] = aux;
+		else if (aux > map->max_d[X])
+			map->max_d[X] = aux;
+		aux = (map->points[i].pos[X] + map->points[i].pos[Y]) * sin(120);
+		aux += map->points[i].pos[Z] * scale[1] + pos0.pos[Y];
+		if (aux < map->min_d[Y])
+			map->min_d[Y] = aux;
+		else if (aux > map->max_d[Y])
+			map->max_d[Y] = aux;	
+		i++;
+	}
+}
+
+int	draw_screen(t_map *map, t_vars *vars, t_data *data)
+{
+	float	*scale;
+	t_point	pos0;
+//	int		move_x;
+//	int		move_y;
+
+	scale = malloc(sizeof(float) * 2);
+	calculate_scale(map, scale);
+	pos0.pos[X] = WIDTH / 2;
+	pos0.pos[Y] = HEIGHT / 4;
+	if (map->limits[Z] > 200)
+	{
+		if (map->limits[X] > 150 && map->limits[Y] > 150)
+			pos0.pos[Y] = HEIGHT / 2;
+	}
+	draw_points(map, data, scale, pos0);
+	get_limits_drawn(map, pos0, scale);
+	printf("Min [X %d] [Y %d]\n", map->min_d[X], map->min_d[Y]);
+	printf("Max [X %d] [Y %d]\n", map->max_d[X], map->max_d[Y]);
+	//move_x = (WIDTH - (map->min_d[X] - map->max_d[X])) / 2;
+	//move_y = (HEIGHT - (map->min_d[Y] - map->max_d[Y])) / 2;
 	mlx_put_image_to_window(vars->mlx, vars->win, data->img, 0, 0);
 	free(scale);
 	return (1);

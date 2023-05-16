@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 18:27:40 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:45:23 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,37 +76,27 @@ static void	straight_line(t_point *p, t_data *img)
 	}
 }
 
-static t_point	*calculate_line_limits(t_point *p0, t_point *p1, float *scale)
+static t_point	*calculate_line_limits(t_point *p, float *scale, t_point pos0)
 {
-	t_point	*p;
 	t_point	a;
 	t_point	b;
 
-	p = malloc(sizeof(t_point) * 2);
-	p[0] = *p0;
-	p[1] = *p1;
-	p[0].pos[X] *= scale[0];
-	p[0].pos[Y] *= scale[0];
-	p[1].pos[X] *= scale[0];
-	p[1].pos[Y] *= scale[0];
 	a = p[0];
 	b = p[1];
 	p[0].pos[X] = (a.pos[X] - a.pos[Y]) * cos(120);
 	p[0].pos[Y] = (a.pos[X] + a.pos[Y]) * sin(120);
 	p[1].pos[X] = (b.pos[X] - b.pos[Y]) * cos(120);
 	p[1].pos[Y] = (b.pos[X] + b.pos[Y]) * sin(120);
-	p[0].pos[X] += 1920 / 2;
-	p[1].pos[X] += 1920 / 2;
-	p[0].pos[Y] += p[0].pos[Z] * scale[1] + 1080 / 4;
-	p[1].pos[Y] += p[1].pos[Z] * scale[1] + 1080 / 4;
+	p[0].pos[X] += pos0.pos[X];
+	p[1].pos[X] += pos0.pos[X];
+	p[0].pos[Y] += p[0].pos[Z] * scale[1] + pos0.pos[Y];
+	p[1].pos[Y] += p[1].pos[Z] * scale[1] + pos0.pos[Y];
 	return (p);
 }
 
-void	line_renderer(t_point *p0, t_point *p1, t_data *img, float *scale)
+void	line_renderer(t_point *p, t_data *img, float *scale, t_point pos0)
 {
-	t_point	*p;
-
-	p = calculate_line_limits(p0, p1, scale);
+	p = calculate_line_limits(p, scale, pos0);
 	if (p[0].pos[X] == p[1].pos[X])
 	{
 		if (p[0].pos[Y] < p[1].pos[Y])
@@ -123,5 +113,4 @@ void	line_renderer(t_point *p0, t_point *p1, t_data *img, float *scale)
 	}
 	else
 		other_line(p, img);
-	free(p);
 }

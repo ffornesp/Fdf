@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/11 13:21:30 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/16 11:01:43 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
 
 SRCS_DIR = srcs/
 SRC_FILES = fdf.c parse_input.c map_set.c set_points.c draw_screen.c key_hook.c \
-			my_mlx.c line_renderer.c line_renderer_utils.c
+			my_mlx.c line_renderer.c line_renderer_utils.c calculate_scale.c
 
 ###############################################################################
 #									OBJS									  #

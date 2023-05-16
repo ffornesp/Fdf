@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 18:21:20 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:31:27 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define X 0
 # define Y 1
 # define Z 2
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_data
 {
@@ -43,6 +45,8 @@ typedef struct s_map
 {
 	char	*fdf_file;
 	int		limits[3];
+	int		min_d[2];
+	int		max_d[2];
 	int		len;
 	t_point	*points;
 }			t_map;
@@ -57,7 +61,8 @@ void	map_set_points(t_map *map);
 
 int		draw_screen(t_map *map, t_vars *vars, t_data *data);
 
-void	line_renderer(t_point *p0, t_point *p1, t_data *img, float *scale);
+void	calculate_scale(t_map *map, float *scale);
+void	line_renderer(t_point *p, t_data *img, float *scale, t_point pos0);
 void	calculate_line(int *k, t_point *p, t_data *img);
 void	draw_check(t_point *p, t_data *img, int color);
 

@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:24:14 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/08 10:42:10 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:23:40 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	map_init(t_map *map)
 	map->limits[Y] = 0;
 	map->limits[Z] = 0;
 	map->len = 0;
+	map->min_d[X] = 0;
+	map->min_d[Y] = 0;
+	map->max_d[X] = 0;
+	map->max_d[Y] = 0;
 }
 
 void	map_set_size(t_map *map)

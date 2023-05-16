@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 15:52:04 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:56:32 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,10 @@ int	main(int argc, char *argv[])
 		return (0);
 	load_map(&map, argv[1]);
 	start_mlx(&vars, &data);
-	// Whatever goes after initialization && before hooks
-	ft_printf("Map limits: [%d X]  [%d Y]  [%d Z]\n", map.limits[X], map.limits[Y], map.limits[Z]);
 	if (draw_screen(&map, &vars, &data) < 0)
 		ft_printf("Error_4: Bad draw screen\n");
-	// Hooks
 	mlx_key_hook(vars.win, key_hook, &vars);
-	// Loop
 	mlx_loop(vars.mlx);
-	// Frees
 	free(map.fdf_file);
 	free(map.points);
 	return (0);
