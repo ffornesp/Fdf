@@ -91,7 +91,7 @@ bytes_per_pixel	mlx/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RG
 calc_size	libft/srcs/ft_itoa.c	/^static void	calc_size(long int n, size_t *size)$/;"	f	file:
 calculate_line	srcs/line_renderer_utils.c	/^void	calculate_line(int *k, t_point *p, t_data *img)$/;"	f
 calculate_line_limits	srcs/line_renderer.c	/^static t_point	*calculate_line_limits(t_point *p, float *scale, t_point pos0)$/;"	f	file:
-calculate_scale	srcs/calculate_scale.c	/^float	*calculate_scale(t_map *map)$/;"	f
+calculate_scale	srcs/calculate_scale.c	/^void	calculate_scale(t_map *map, float *scale)$/;"	f
 calculate_scale_z	srcs/calculate_scale.c	/^static float	calculate_scale_z(float scale)$/;"	f	file:
 col	mlx/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	include/fdf.h	/^	int		color;$/;"	m	struct:s_point
@@ -159,10 +159,10 @@ ft_tolower	libft/srcs/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	libft/srcs/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
 func_t	mlx/mlx_int.h	/^typedef int (*func_t)();$/;"	t
 get_color	srcs/line_renderer_utils.c	/^static int	get_color(t_point *p)$/;"	f	file:
-get_limits_drawn	srcs/draw_screen.c	/^static void	get_limits_drawn(t_map *map, t_point pos0, float *scale)$/;"	f	file:
+get_limits_1	srcs/draw_screen.c	/^static void	get_limits_1(t_map *map, t_point p, float *scale, t_point pos0)$/;"	f	file:
 get_line	libft/get_next_line/get_next_line.c	/^static char	*get_line(char *str)$/;"	f	file:
 get_next_line	libft/get_next_line/get_next_line.c	/^char	*get_next_line(int fd)$/;"	f
-get_points	srcs/draw_screen.c	/^static t_point	*get_points(t_point p0, t_point p1, float *scale)$/;"	f	file:
+get_points	srcs/draw_screen.c	/^static t_point	*get_points(t_point p0, t_point p1, float *scale, t_point *p)$/;"	f	file:
 glsl_info_s	mlx/mlx_int.h	/^typedef struct	glsl_info_s$/;"	s
 glsl_info_t	mlx/mlx_int.h	/^} glsl_info_t;$/;"	t	typeref:struct:glsl_info_s
 height	mlx/font.c	/^  unsigned int 	 height;$/;"	m	struct:__anon1	file:

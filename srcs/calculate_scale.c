@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:00:12 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/16 11:31:40 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:51:11 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static float	calculate_scale_z(float scale)
 	float	scale_z;
 
 	scale_z = -2.5f;
-	if (scale < 1.5f)
+	if (scale < 1.5f && scale > 1.1f)
 		scale_z /= 2;
+	else if (scale <= 1.1f)
+		scale_z /= 4;
 	if (scale > 5 && scale < 25)
 		scale_z *= 4;
 	return (scale_z);
