@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:04:21 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 18:05:05 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:34:38 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static int	get_color(t_point *p)
 
 void	draw_check(t_point *p, t_data *img, int color)
 {
-	if (p[0].pos[X] >= 0 && p[0].pos[X] <= 1919
-		&& p[0].pos[Y] >= 0 && p[0].pos[Y] <= 1079)
+	if (p[0].pos[X] >= 0 && p[0].pos[X] < WIDTH 
+		&& p[0].pos[Y] >= 0 && p[0].pos[Y] < HEIGHT)
 		my_mlx_pixel_put(img, p[0].pos[X], p[0].pos[Y], color);
 }
 
