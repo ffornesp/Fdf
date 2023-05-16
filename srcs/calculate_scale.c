@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:00:12 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/16 17:51:11 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:29:57 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,15 @@ void	calculate_scale(t_map *map, float *scale)
 	scale[0] = 1;
 	while ((map->limits[X] + map->limits[X] / 2) * scale[0] + 960 < WIDTH)
 		scale[0] += 0.1f;
-	while ((map->limits[Y] * scale[0]) + (map->limits[Z] * 2.5f) + 270 > HEIGHT)
+	while ((map->limits[Y] * scale[0]) + (map->limits[Z] * 2.5f) + 270 > HEIGHT
+		&& scale[0] > 0)
 		scale[0] -= 0.1f;
 	if (scale[0] <= 0)
-		scale[0] = 0;
+	{
+		scale[0] = 30;
+		scale[1] = 0.5f;
+		return ;
+	}
 	if (map->limits[Z] > 200)
 	{
 		if (map->limits[X] >= 200 && map->limits[Y] >= 200)

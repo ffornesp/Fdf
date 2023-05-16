@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:41:45 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/16 11:31:27 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:20:24 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_point
 {
 	int		pos[3];
 	int		color;
-	int		hex_color;
 }			t_point;
 
 typedef struct s_map

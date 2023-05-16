@@ -6,10 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/16 18:06:33 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:42:43 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fdf.h"
 #include "color_defs.h"
 #include "mlx.h"
@@ -87,6 +88,8 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 
 	scale = malloc(sizeof(float) * 2);
 	calculate_scale(map, scale);
+	printf("Map limits [X %d, Y %d, Z %d]\n", map->limits[X], map->limits[Y], map->limits[Z]);
+	printf("Scale [%.2f] Z [%.2f]\n", scale[0], scale[1]);
 	pos0.pos[X] = WIDTH / 2;
 	pos0.pos[Y] = HEIGHT / 4;
 	if (map->limits[Z] > 200)
