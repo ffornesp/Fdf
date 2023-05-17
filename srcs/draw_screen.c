@@ -6,13 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/17 11:56:02 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:45:29 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fdf.h"
-#include "color_defs.h"
 #include "mlx.h"
 #include <math.h>
 #include <stdlib.h>
@@ -79,17 +77,6 @@ static void	draw_points(t_map *map, t_data *data, float *scale, t_point pos0)
 	free(p);
 }
 
-static t_point	get_init_pos(t_map *map)
-{
-	t_point	pos0;
-
-	pos0.pos[X] = WIDTH / 2;
-	pos0.pos[Y] = HEIGHT / 4;
-	if (map->limits[X] / 2 < map->limits[Y]
-		|| map->limits[Y] / 2 < map->limits[X])
-		pos0.pos[Y] = HEIGHT / 2;
-	return (pos0);
-}
 int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 {
 	float	*scale;
@@ -98,7 +85,8 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 	int		move_y;
 
 	scale = malloc(sizeof(float) * 2);
-	pos0 = get_init_pos(map);
+	pos0.pos[X] = WIDTH / 2;
+	pos0.pos[Y] = HEIGHT / 4;
 	calculate_scale(map, scale, pos0);
 	if (map->limits[Z] > 200)
 	{

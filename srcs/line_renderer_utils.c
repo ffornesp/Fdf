@@ -6,11 +6,10 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:04:21 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/17 11:54:26 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:46:21 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "fdf.h"
 #include "color_defs.h"
 

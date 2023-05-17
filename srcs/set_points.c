@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:41:07 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/15 17:37:19 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:48:19 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ static void	set_point_coords(t_point *point, int x, int y, char *line)
 	}
 	else
 		point->color = WHITE;
+	if (point->pos[Z] > 100000)
+		point->pos[Z] = 100000;
+	else if (point->pos[Z] < -100000)
+		point->pos[Z] = -100000;
 }
 
 static void	set_limit_z(t_map *map)

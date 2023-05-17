@@ -25,6 +25,9 @@ FONT_WIDTH	mlx/mlx_int.h	/^#define FONT_WIDTH	/;"	d
 FT_PRINTF_H	libft/include/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
 GET_NEXT_LINE_H	libft/include/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
 GREEN	include/color_defs.h	/^# define GREEN /;"	d
+HDRS	Makefile	/^HDRS = $(addprefix $(HDR_DIR), $(HDR_FILES))$/;"	m
+HDR_DIR	Makefile	/^HDR_DIR = include\/$/;"	m
+HDR_FILES	Makefile	/^HDR_FILES = fdf.h color_defs.h keycode_defs.h$/;"	m
 HEIGHT	include/fdf.h	/^# define HEIGHT /;"	d
 INCLUDE	Makefile	/^INCLUDE  = -I .\/include\/ -I .\/libft\/include\/ -I .\/mlx\/$/;"	m
 INCLUDES	libft/Makefile	/^INCLUDES = include\/$/;"	m
@@ -91,7 +94,7 @@ bytes_per_pixel	mlx/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RG
 calc_size	libft/srcs/ft_itoa.c	/^static void	calc_size(long int n, size_t *size)$/;"	f	file:
 calculate_line	srcs/line_renderer_utils.c	/^void	calculate_line(int *k, t_point *p, t_data *img)$/;"	f
 calculate_line_limits	srcs/line_renderer.c	/^static t_point	*calculate_line_limits(t_point *p, float *scale, t_point pos0)$/;"	f	file:
-calculate_scale	srcs/calculate_scale.c	/^void	calculate_scale(t_map *map, float *scale)$/;"	f
+calculate_scale	srcs/calculate_scale.c	/^void	calculate_scale(t_map *map, float *scale, t_point pos0)$/;"	f
 calculate_scale_z	srcs/calculate_scale.c	/^static float	calculate_scale_z(float scale)$/;"	f	file:
 col	mlx/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	include/fdf.h	/^	int		color;$/;"	m	struct:s_point
@@ -105,6 +108,7 @@ draw_points	srcs/draw_screen.c	/^static void	draw_points(t_map *map, t_data *dat
 draw_screen	srcs/draw_screen.c	/^int	draw_screen(t_map *map, t_vars *vars, t_data *data)$/;"	f
 endian	include/fdf.h	/^	int		endian;$/;"	m	struct:s_data
 fdf_file	include/fdf.h	/^	char	*fdf_file;$/;"	m	struct:s_map
+finish_execution	srcs/key_hook.c	/^int	finish_execution()$/;"	f
 font	mlx/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font_atlas	mlx/font.c	/^} font_atlas = {$/;"	v	typeref:struct:__anon1	file:
 font_fshader	mlx/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_info_s
@@ -159,6 +163,7 @@ ft_tolower	libft/srcs/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	libft/srcs/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
 func_t	mlx/mlx_int.h	/^typedef int (*func_t)();$/;"	t
 get_color	srcs/line_renderer_utils.c	/^static int	get_color(t_point *p)$/;"	f	file:
+get_init_pos	srcs/draw_screen.c	/^static t_point	get_init_pos(t_map *map)$/;"	f	file:
 get_limits_1	srcs/draw_screen.c	/^static void	get_limits_1(t_map *map, t_point p, float *scale, t_point pos0)$/;"	f	file:
 get_line	libft/get_next_line/get_next_line.c	/^static char	*get_line(char *str)$/;"	f	file:
 get_next_line	libft/get_next_line/get_next_line.c	/^char	*get_next_line(int fd)$/;"	f
@@ -167,7 +172,6 @@ glsl_info_s	mlx/mlx_int.h	/^typedef struct	glsl_info_s$/;"	s
 glsl_info_t	mlx/mlx_int.h	/^} glsl_info_t;$/;"	t	typeref:struct:glsl_info_s
 height	mlx/font.c	/^  unsigned int 	 height;$/;"	m	struct:__anon1	file:
 height	mlx/mlx_int.h	/^  int			height;$/;"	m	struct:mlx_img_list_s
-hex_color	include/fdf.h	/^	int		hex_color;$/;"	m	struct:s_point
 image_fshader	mlx/mlx_int.h	/^  GLuint	image_fshader;$/;"	m	struct:glsl_info_s
 image_program	mlx/mlx_int.h	/^  GLuint	image_program;$/;"	m	struct:glsl_info_s
 image_vshader	mlx/mlx_int.h	/^  GLuint	image_vshader;$/;"	m	struct:glsl_info_s

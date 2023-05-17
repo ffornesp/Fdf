@@ -6,12 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:00:12 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/17 11:43:50 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:52:46 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
 
 static float	calculate_scale_z(float scale)
 {
@@ -20,6 +19,8 @@ static float	calculate_scale_z(float scale)
 	scale_z = -2.5f;
 	if (scale > 13.3f && scale < 13.5f)
 		return (scale_z * 2);
+	if (scale > 23.0f && scale < 23.2f)
+		return (-10);
 	if (scale < 1.5f && scale > 1.1f)
 		scale_z /= 2;
 	else if (scale <= 1.1f)
@@ -30,7 +31,8 @@ static float	calculate_scale_z(float scale)
 void	calculate_scale(t_map *map, float *scale, t_point pos0)
 {
 	scale[0] = 1;
-	while ((map->limits[X] + map->limits[X] / 2) * scale[0] + pos0.pos[X] < WIDTH)
+	while ((map->limits[X] + map->limits[X] / 2)
+		* scale[0] + pos0.pos[X] < WIDTH)
 		scale[0] += 0.1f;
 	if (map->limits[Z] < 270)
 	{
@@ -43,5 +45,8 @@ void	calculate_scale(t_map *map, float *scale, t_point pos0)
 		if (map->limits[X] >= 200 && map->limits[Y] >= 200)
 			scale[0] = 2;
 	}
+	else if (map->limits[Z] > 150
+		&& map->limits[X] >= 100 && map->limits[Y] >= 100)
+		scale[0] = 4;
 	scale[1] = calculate_scale_z(scale[0]);
 }

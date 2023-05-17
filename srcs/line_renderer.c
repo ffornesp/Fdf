@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/17 12:04:55 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:35:47 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,26 +97,20 @@ static t_point	*calculate_line_limits(t_point *p, float *scale, t_point pos0)
 void	line_renderer(t_point *p, t_data *img, float *scale, t_point pos0)
 {
 	p = calculate_line_limits(p, scale, pos0);
-	if ((p[0].pos[X] >= 0 && p[0].pos[X] < WIDTH
-		&& p[0].pos[Y] >= 0 && p[0].pos[Y] < HEIGHT)
-		|| (p[1].pos[X] >= 0 && p[1].pos[X] < WIDTH
-		&& p[1].pos[Y] >= 0 && p[1].pos[Y] < HEIGHT))
+	if (p[0].pos[X] == p[1].pos[X])
 	{
-		if (p[0].pos[X] == p[1].pos[X])
-		{
-			if (p[0].pos[Y] < p[1].pos[Y])
-				straight_line(p, img);
-			else
-				straight_line(p, img);
-		}
-		else if (p[0].pos[Y] == p[1].pos[Y])
-		{
-			if (p[0].pos[X] < p[1].pos[X])
-				straight_line(p, img);
-			else
-				straight_line(p, img);
-		}
+		if (p[0].pos[Y] < p[1].pos[Y])
+			straight_line(p, img);
 		else
-			other_line(p, img);
+			straight_line(p, img);
 	}
+	else if (p[0].pos[Y] == p[1].pos[Y])
+	{
+		if (p[0].pos[X] < p[1].pos[X])
+			straight_line(p, img);
+		else
+			straight_line(p, img);
+	}
+	else
+		other_line(p, img);
 }
