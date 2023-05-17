@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:47:31 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/16 11:01:43 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/17 10:12:00 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
 MLX_DIR = mlx/
 MLX_FILE = libmlx.a
 MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
+
+HDR_FILES = fdf.h color_defs.h keycode_defs.h
+HDR_DIR = include/
+HDRS = $(addprefix $(HDR_DIR), $(HDR_FILES))
 
 ###############################################################################
 #									SRCS									  #
@@ -50,7 +54,7 @@ INCLUDE  = -I ./include/ -I ./libft/include/ -I ./mlx/
 #									RULES									  #
 ###############################################################################
 
-all: 		$(NAME)
+all: 		$(NAME) $(HDRS)
 
 m_libft:
 			@make -C $(LIBFT_DIR)
@@ -64,7 +68,7 @@ $(NAME):	m_libft m_mlx $(OBJS_DIR) $(OBJS)
 $(OBJS_DIR):
 						@mkdir $@
 
-$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
+$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c $(HDRS)
 				$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
 
 clean: 		

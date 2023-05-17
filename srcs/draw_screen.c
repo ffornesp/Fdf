@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:12:09 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/16 18:42:43 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 11:56:02 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ static void	draw_points(t_map *map, t_data *data, float *scale, t_point pos0)
 	free(p);
 }
 
+static t_point	get_init_pos(t_map *map)
+{
+	t_point	pos0;
+
+	pos0.pos[X] = WIDTH / 2;
+	pos0.pos[Y] = HEIGHT / 4;
+	if (map->limits[X] / 2 < map->limits[Y]
+		|| map->limits[Y] / 2 < map->limits[X])
+		pos0.pos[Y] = HEIGHT / 2;
+	return (pos0);
+}
 int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 {
 	float	*scale;
@@ -87,21 +98,21 @@ int	draw_screen(t_map *map, t_vars *vars, t_data *data)
 	int		move_y;
 
 	scale = malloc(sizeof(float) * 2);
-	calculate_scale(map, scale);
-	printf("Map limits [X %d, Y %d, Z %d]\n", map->limits[X], map->limits[Y], map->limits[Z]);
-	printf("Scale [%.2f] Z [%.2f]\n", scale[0], scale[1]);
-	pos0.pos[X] = WIDTH / 2;
-	pos0.pos[Y] = HEIGHT / 4;
+	pos0 = get_init_pos(map);
+	calculate_scale(map, scale, pos0);
 	if (map->limits[Z] > 200)
 	{
 		if (map->limits[X] > 150 && map->limits[Y] > 150)
 			pos0.pos[Y] = HEIGHT / 2;
 	}
 	draw_points(map, data, scale, pos0);
-	move_x = (WIDTH - (map->max_d[X] - map->min_d[X])) / 2;
-	move_x = map->min_d[X] - move_x;
-	move_y = (HEIGHT - (map->max_d[Y] - map->min_d[Y])) / 2;
-	move_y = map->min_d[Y] - move_y;
+	move_x = map->min_d[X] - ((WIDTH - (map->max_d[X] - map->min_d[X])) / 2);
+	move_y = map->min_d[Y] - ((HEIGHT - (map->max_d[Y] - map->min_d[Y])) / 2);
+	if (map->limits[X] > WIDTH / (4 / 3))
+		move_x = 0;
+	if (map->limits[Z] > HEIGHT / (4 / 3)
+		|| map->limits[Y] > HEIGHT / (4 / 3))
+		move_y = 0;
 	mlx_put_image_to_window(vars->mlx, vars->win, data->img, -move_x, -move_y);
 	free(scale);
 	return (1);

@@ -6,11 +6,11 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:11:28 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/16 10:56:32 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 11:10:06 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 #include "fdf.h"
 #include "mlx.h"
 #include <stdlib.h>
@@ -43,14 +43,22 @@ int	main(int argc, char *argv[])
 	t_map	map;
 	t_vars	vars;
 	t_data	data;
+	char	*aux;
 
 	if (argc < 2 || argc > 2)
 		return (0);
+	aux = argv[1] + ft_strlen(argv[1]) - 4;
+	if (ft_strncmp(aux, ".fdf", 4))
+	{
+		ft_putstr_fd("Error: File is not valid\n", 2);
+		return (0);
+	}
 	load_map(&map, argv[1]);
 	start_mlx(&vars, &data);
 	if (draw_screen(&map, &vars, &data) < 0)
-		ft_printf("Error_4: Bad draw screen\n");
+		ft_putstr_fd("Error: Not able to draw screen\n", 2);
 	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_hook(vars.win, 17, 0, finish_execution, &vars);
 	mlx_loop(vars.mlx);
 	free(map.fdf_file);
 	free(map.points);
