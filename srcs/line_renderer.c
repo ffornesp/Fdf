@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:19:10 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/17 14:35:47 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:38:24 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	straight_line(t_point *p, t_data *img)
 		color = p[0].color;
 	if (p[0].pos[X] == p[1].pos[X])
 	{
-		while (p[0].pos[Y] < p[1].pos[Y])
+		while (p[0].pos[Y] != p[1].pos[Y])
 		{
 			draw_check(p, img, color);
 			modify_points(&p[0], &p[1], 0);
@@ -68,7 +68,7 @@ static void	straight_line(t_point *p, t_data *img)
 	}
 	else
 	{
-		while (p[0].pos[X] < p[1].pos[X])
+		while (p[0].pos[X] != p[1].pos[X])
 		{
 			draw_check(p, img, color);
 			modify_points(&p[0], &p[1], 1);

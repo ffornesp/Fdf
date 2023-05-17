@@ -6,7 +6,7 @@
 /*   By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:04:21 by ffornes-          #+#    #+#             */
-/*   Updated: 2023/05/17 15:24:50 by ffornes-         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:41:19 by ffornes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	calculate_line(int *k, t_point *p, t_data *img)
 	}
 	else
 	{
-		d = 2 * (k[X] - k[X]);
+		d = 2 * (k[X] - k[Y]);
 		if (k[Y] < 0 && -1 * k[Y] < k[X])
 			d = 2 * (k[X] + k[Y]);
 		while (p[0].pos[X] <= p[1].pos[X] && p[0].pos[Y] >= p[1].pos[Y])
