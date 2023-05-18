@@ -6,7 +6,7 @@
 #    By: ffornes- <ffornes-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:51:17 by ffornes-          #+#    #+#              #
-#    Updated: 2023/05/05 18:04:59 by ffornes-         ###   ########.fr        #
+#    Updated: 2023/05/18 10:50:12 by ffornes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,11 +69,15 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 AR = ar rc
 
+HDR_FILES = libft.h ft_printf.h get_next_line.h
+HDR_DIR = include/
+HDRS = $(addprefix $(HDR_DIR), $(HDR_FILES))
+
 ###############################################################################
 #									RULES									  #
 ###############################################################################
 
-all: 		$(NAME)
+all: 		$(NAME) $(HDRS)
 
 $(NAME):	$(OBJS_LIBFT_DIR) $(OBJS_PRINTF_DIR) $(OBJS_GNL_DIR) $(OBJS)
 			$(AR) $@ $(OBJS)
@@ -87,13 +91,13 @@ $(OBJS_PRINTF_DIR):
 $(OBJS_GNL_DIR):
 						@mkdir $(OBJS_GNL_DIR)
 
-$(OBJS_LIBFT_DIR)%.o:	$(SRCS_LIBFT_DIR)%.c
+$(OBJS_LIBFT_DIR)%.o:	$(SRCS_LIBFT_DIR)%.c include/libft.h
 						$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
 
-$(OBJS_PRINTF_DIR)%.o:	$(SRCS_PRINTF_DIR)%.c
+$(OBJS_PRINTF_DIR)%.o:	$(SRCS_PRINTF_DIR)%.c include/ft_printf.h
 						$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
 
-$(OBJS_GNL_DIR)%.o:		$(SRCS_GNL_DIR)%.c
+$(OBJS_GNL_DIR)%.o:		$(SRCS_GNL_DIR)%.c include/get_next_line.h
 						$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
 
 clean: 		
