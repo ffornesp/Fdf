@@ -13,7 +13,7 @@
 #ifndef KEYCODE_DEFS_H
 # define KEYCODE_DEFS_H
 
-# define ESC 53
+# define ESC 65307
 # define ARROW_L 123
 # define ARROW_R 124
 # define ARROW_D 125

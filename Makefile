@@ -16,7 +16,8 @@ LIBFT_DIR = libft/
 LIBFT_FILE = libft.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
 
-MLX_DIR = mlx/
+#MLX_DIR = mlx/
+MLX_DIR = mlx_linux/
 MLX_FILE = libmlx.a
 MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
 
@@ -45,10 +46,11 @@ OBJS = $(addprefix $(OBJS_DIR), $(OBJ_FILES))
 ###############################################################################
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS =  
 RM = rm -f
 AR = ar rc
-INCLUDE  = -I ./include/ -I ./libft/include/ -I ./mlx/
+#INCLUDE = -I ./include/ -I ./libft/include -I ./mlx/
+INCLUDE  = -I ./include/ -I ./libft/include/ -I ./mlx_linux/
 
 ###############################################################################
 #									RULES									  #
@@ -63,13 +65,14 @@ m_mlx:
 			@rm ERRORS
 
 $(NAME):	m_libft m_mlx $(OBJS_DIR) $(OBJS)
-			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm -o $@
+			@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $@
+#@$(CC) $(INCLUDE) $(OBJS) -Llibft/ -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm -o
 
 $(OBJS_DIR):
 						@mkdir $@
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c $(HDRS)
-				$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
+				$(CC) -Wall -Wextra -Werror -I/usr/include $(INCLUDE) -O3 -c $< -o $@
 
 clean: 		
 			make -C $(LIBFT_DIR) clean

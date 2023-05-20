@@ -16,8 +16,8 @@
 # define X 0
 # define Y 1
 # define Z 2
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1200
+# define HEIGHT 700
 
 typedef struct s_data
 {

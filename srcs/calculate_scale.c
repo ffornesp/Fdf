@@ -34,7 +34,7 @@ void	calculate_scale(t_map *map, float *scale, t_point pos0)
 	while ((map->limits[X] + map->limits[X] / 2)
 		* scale[0] + pos0.pos[X] < WIDTH)
 		scale[0] += 0.1f;
-	if (map->limits[Z] < 270)
+	if (map->limits[Z] < HEIGHT / 4)
 	{
 		while ((map->limits[Y] * scale[0])
 			+ (map->limits[Z] * 2.5f) + pos0.pos[Y] > HEIGHT && scale[0] > 0)

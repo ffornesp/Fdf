@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "fdf.h"
 #include "keycode_defs.h"
 #include "mlx.h"
@@ -17,6 +18,7 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
+	ft_printf("Keycode: %d\n", keycode);
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);

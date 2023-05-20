@@ -20,8 +20,8 @@
 static void	start_mlx(t_vars *vars, t_data *d)
 {
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, 1920, 1080, "ffornes- Fdf");
-	d->img = mlx_new_image(vars->mlx, 1920, 1080);
+	vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "ffornes- Fdf");
+	d->img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	d->addr = mlx_get_data_addr(d->img, &d->bpps, &d->l_len, &d->endian);
 	mlx_put_image_to_window(vars->mlx, vars->win, d->img, 0, 0);
 }
